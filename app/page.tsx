@@ -37,7 +37,7 @@ export default function Home() {
                     description={
                         "An on demand 3D printing service."
                     }
-                    link={"https://www.instagram.com/my3dprint_tp"}
+                    link={"https://www.instagram.com/_my_3d_prints_"}
                 />
                 <LinkButton
                     name={"Nimble"}
