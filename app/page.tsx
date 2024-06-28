@@ -25,11 +25,11 @@ export default function Home() {
 
             <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left ">
                 <LinkButton
-                    name={"memo."}
+                    name={"Gotcha"}
                     description={
-                        "The Single Application for Examinations."
+                        "Autonomous cheat detection online and offline."
                     }
-                    link={"https://memo.school/"}
+                    link={"https://gotchaexam.com/"}
                 />
                 
                 <LinkButton
