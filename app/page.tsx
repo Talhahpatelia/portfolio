@@ -10,7 +10,7 @@ export default function Home() {
             </h1>
             <hr className="lg:w-[50%] w-full h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-5 dark:bg-white-700" />
             <p className="text-2xl m-2">
-                ______________ Achievements ______________
+                ______________ Achievements PDF ______________
             </p>
             <LinkButton
                 name={"PDF"}
