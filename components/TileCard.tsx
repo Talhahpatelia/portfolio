@@ -22,20 +22,20 @@ export default function TileCard({
   const fullUrl = typeof window === "undefined" ? href : `${window.location.origin}${href}`;
 
   return (
-    <div className="group rounded-2xl border border-zinc-800 bg-zinc-900/30 p-4 hover:border-zinc-600">
+    <div className="group rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-surface)] p-4 shadow-[var(--shadow-soft)] transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-muted)]">
       <div className="flex items-start justify-between gap-3">
-        <Link href={href} className="text-base font-semibold leading-snug hover:underline">
+        <Link href={href} className="text-base font-semibold leading-snug text-[var(--text-primary)] hover:underline">
           {title}
         </Link>
         <CopyLinkButton url={fullUrl} />
       </div>
 
-      <p className={["mt-2 text-sm text-zinc-300", size === "long" ? "" : "line-clamp-2"].join(" ")}>
+      <p className={["mt-2 text-sm text-[var(--text-muted)]", size === "long" ? "" : "line-clamp-2"].join(" ")}>
         {short}
       </p>
 
       {image && size === "long" && (
-        <div className="mt-3 overflow-hidden rounded-xl border border-zinc-800">
+        <div className="mt-3 overflow-hidden rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface-muted)]">
           <Image src={image.src} alt={image.alt} width={1200} height={630} className="h-auto w-full" />
         </div>
       )}
@@ -44,7 +44,7 @@ export default function TileCard({
         {tags.slice(0, 6).map((t) => (
           <span
             key={t}
-            className="rounded-full border border-zinc-800 bg-zinc-950/40 px-2 py-0.5 text-xs text-zinc-400"
+            className="rounded-full border border-[var(--pill-border)] bg-[var(--pill-bg)] px-2 py-0.5 text-xs text-[var(--pill-text)] transition hover:border-[var(--border-strong)]"
           >
             {t}
           </span>

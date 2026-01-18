@@ -34,6 +34,7 @@ export type BaseItem = {
 export type AwardItem = BaseItem & {
   org?: string;
   role?: string;
+  stack?: string[];
 };
 
 export type ProjectItem = BaseItem & {

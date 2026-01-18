@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function AwardsPage() {
   return (
     <main className="space-y-6">
-      <h1 className="text-3xl font-bold">Awards & Achievements</h1>
+      <h1 className="text-3xl font-bold text-[var(--text-primary)]">Awards & Achievements</h1>
       <div className="grid gap-4 md:grid-cols-2">
         {awards.map((a) => (
           <TileCard

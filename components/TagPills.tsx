@@ -18,13 +18,15 @@ export default function TagPills({
         return (
           <button
             key={t}
+            type="button"
             onClick={() => onToggle(t)}
             className={[
               "rounded-full border px-3 py-1 text-xs transition",
               isOn
-                ? "border-zinc-500 bg-zinc-800 text-white"
-                : "border-zinc-800 bg-zinc-900/40 text-zinc-300 hover:border-zinc-600",
+                ? "border-[var(--accent)] bg-[var(--pill-active-bg)] text-[var(--pill-active-text)] shadow-sm"
+                : "border-[var(--pill-border)] bg-[var(--pill-bg)] text-[var(--pill-text)] hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]",
             ].join(" ")}
+            aria-pressed={isOn}
           >
             {t}
           </button>
@@ -32,8 +34,9 @@ export default function TagPills({
       })}
       {active.length > 0 && (
         <button
+          type="button"
           onClick={onClear}
-          className="rounded-full border border-zinc-800 px-3 py-1 text-xs text-zinc-400 hover:border-zinc-600"
+          className="rounded-full border border-[var(--pill-border)] bg-[var(--pill-bg)] px-3 py-1 text-xs text-[var(--text-muted)] transition hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]"
         >
           Clear
         </button>

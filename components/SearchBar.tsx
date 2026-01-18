@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRef } from "react";
 import type { SearchDoc } from "@/lib/search";
 
 export default function SearchBar({
@@ -12,28 +13,37 @@ export default function SearchBar({
   onChange: (v: string) => void;
   results: SearchDoc[];
 }) {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
   return (
     <div className="relative">
       <input
+        ref={inputRef}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="Search awards + projects (e.g. HPC, infusion, proctoring)…"
-        className="w-full rounded-xl border border-zinc-800 bg-zinc-900/60 px-4 py-3 text-sm outline-none placeholder:text-zinc-500 focus:border-zinc-600"
+        placeholder="Search awards + projects (e.g. HPC, infusion, proctoring)."
+        className="w-full rounded-xl border border-[var(--border-soft)] bg-[var(--bg-surface)] px-4 py-3
+           text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]
+           shadow-[var(--shadow-soft)] focus:border-[var(--accent)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
       />
 
       {(value.trim().length > 0 && results.length > 0) && (
-        <div className="absolute mt-2 w-full overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950">
+        <div className="absolute mt-2 w-full overflow-hidden rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface)] shadow-[var(--shadow-soft)]">
           {results.map((r) => (
             <Link
               key={`${r.type}:${r.slug}`}
               href={r.href}
-              className="block px-4 py-3 hover:bg-zinc-900/60"
+              onClick={() => {
+                onChange("");
+                inputRef.current?.blur();
+              }}
+              className="block px-4 py-3 hover:bg-[var(--bg-surface-muted)]"
             >
               <div className="flex items-center justify-between gap-3">
-                <div className="text-sm font-medium">{r.title}</div>
-                <div className="text-xs text-zinc-500">{r.type}</div>
+                <div className="text-sm font-medium text-[var(--text-primary)]">{r.title}</div>
+                <div className="text-xs text-[var(--text-muted)]">{r.type}</div>
               </div>
-              <div className="mt-1 text-xs text-zinc-400">{r.short}</div>
+              <div className="mt-1 text-xs text-[var(--text-muted)]">{r.short}</div>
             </Link>
           ))}
         </div>

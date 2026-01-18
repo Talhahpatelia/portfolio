@@ -10,18 +10,27 @@ export default function HomePage() {
   return (
     <main className="space-y-10">
       <section className="space-y-3">
-        <h1 className="text-4xl font-extrabold tracking-tight">Talhah Patelia</h1>
-        <p className="max-w-2xl text-zinc-300">
+        <h1 className="text-4xl font-extrabold tracking-tight text-[var(--text-primary)]">Talhah Patelia</h1>
+        <p className="max-w-2xl text-[var(--text-muted)]">
           Engineering + building across embedded systems, HPC, and startups.
         </p>
         <div className="flex gap-3 text-sm">
-          <Link className="rounded-xl border border-zinc-800 px-4 py-2 hover:border-zinc-600" href="/awards">
+          <Link
+            className="rounded-xl border border-[var(--border-soft)] bg-[var(--bg-surface)] px-4 py-2 text-[var(--text-primary)] shadow-[var(--shadow-soft)] transition hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-muted)]"
+            href="/awards"
+          >
             View Awards
           </Link>
-          <Link className="rounded-xl border border-zinc-800 px-4 py-2 hover:border-zinc-600" href="/projects">
+          <Link
+            className="rounded-xl border border-[var(--border-soft)] bg-[var(--bg-surface)] px-4 py-2 text-[var(--text-primary)] shadow-[var(--shadow-soft)] transition hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-muted)]"
+            href="/projects"
+          >
             View Projects
           </Link>
-          <Link className="rounded-xl border border-zinc-800 px-4 py-2 hover:border-zinc-600" href="/contact">
+          <Link
+            className="rounded-xl border border-[var(--border-soft)] bg-[var(--bg-surface)] px-4 py-2 text-[var(--text-primary)] shadow-[var(--shadow-soft)] transition hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-muted)]"
+            href="/contact"
+          >
             Contact
           </Link>
         </div>
@@ -29,8 +38,10 @@ export default function HomePage() {
 
       <section className="space-y-4">
         <div className="flex items-end justify-between">
-          <h2 className="text-xl font-semibold">Featured Awards</h2>
-          <Link className="text-sm text-zinc-400 hover:text-white" href="/awards">All awards →</Link>
+          <h2 className="text-xl font-semibold text-[var(--text-primary)]">Featured Awards</h2>
+          <Link className="text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]" href="/awards">
+            All awards →
+          </Link>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           {featuredAwards.map((a) => (
@@ -47,8 +58,10 @@ export default function HomePage() {
 
       <section className="space-y-4">
         <div className="flex items-end justify-between">
-          <h2 className="text-xl font-semibold">Featured Projects</h2>
-          <Link className="text-sm text-zinc-400 hover:text-white" href="/projects">All projects →</Link>
+          <h2 className="text-xl font-semibold text-[var(--text-primary)]">Featured Projects</h2>
+          <Link className="text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]" href="/projects">
+            All projects →
+          </Link>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           {featuredProjects.map((p) => (
