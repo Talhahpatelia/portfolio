@@ -12,7 +12,7 @@ export default function AwardsPage() {
     <main className="space-y-6">
       <h1 className="text-3xl font-bold text-[var(--text-primary)]">Awards & Achievements</h1>
       <div className="grid gap-4 md:grid-cols-2">
-        {awards.map((a) => (
+        {[...awards].reverse().map((a) => (
           <TileCard
             key={a.slug}
             title={a.title}

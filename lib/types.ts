@@ -29,6 +29,7 @@ export type BaseItem = {
     alt: string;
   };
   links?: LinkItem[];
+  featured?: boolean;
 };
 
 export type AwardItem = BaseItem & {
@@ -37,7 +38,24 @@ export type AwardItem = BaseItem & {
   stack?: string[];
 };
 
+
+export type ProjectStage =
+  | "Idea"
+  | "Validation"
+  | "MVP"
+  | "Scaling"
+  | "Completed";
+
+export type FundingStage =
+  | "Bootstrapped"
+  | "Grant"
+  | "Pre-Seed"
+  | "Seed"
+  | "Funded"
+  | "None";
+
 export type ProjectItem = BaseItem & {
-  status?: "Active" | "Paused" | "Shipped";
+  stage: ProjectStage;        // business / product lifecycle
+  funding?: FundingStage;     // money status (optional)
   stack?: string[];
 };

@@ -84,6 +84,7 @@ export const awards: AwardItem[] = [
     tags: ["Robotics", "Engineering"],
     date: "2019-08",
     org: "Eskom Holdings SOC Ltd",
+    featured: true,
   },
   {
     slug: "gauteng-north-gold-2019",
@@ -186,6 +187,7 @@ export const awards: AwardItem[] = [
     tags: ["Community", "Healthcare"],
     date: "2020-12",
     org: "Reddam House Bedfordview",
+    featured: true,
   },
 
   // ===== 2021 =====
@@ -208,6 +210,7 @@ export const awards: AwardItem[] = [
     tags: ["Recognition"],
     date: "2021-06",
     org: "Geekulcha",
+    featured: true,
   },
   {
     slug: "tadhack-winner-2021",
@@ -278,6 +281,7 @@ export const awards: AwardItem[] = [
     tags: ["Startup", "Funding"],
     date: "2024-07",
     org: "Allan Gray Orbis Foundation",
+    featured: true,
   },
   {
     slug: "chpc-national-conference-2024",
@@ -306,6 +310,7 @@ export const awards: AwardItem[] = [
         href: "https://afretec.uonbi.ac.ke/afretec-uon-student-makerthon-2024-a-showcase-of-innovation-and-collaboration/",
       },
     ],
+    featured: true,
   },
   {
     slug: "asc-top-25-global-2025",
@@ -316,6 +321,7 @@ export const awards: AwardItem[] = [
     tags: ["HPC", "International"],
     date: "2025-03",
     org: "ASC",
+    featured: true,
   },
   {
     slug: "deans-award-hpc-2025",
@@ -326,5 +332,6 @@ export const awards: AwardItem[] = [
     tags: ["Academic", "HPC"],
     date: "2025-08",
     org: "University of the Witwatersrand",
+    featured: true,
   },
 ];
