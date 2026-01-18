@@ -1,23 +1,28 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/react';
+// app/layout.tsx
+import type { Metadata } from "next";
+import "./globals.css"
+import SiteHeader from "@/components/SiteHeader";
 
-const inter = Inter({ subsets: ['latin'] })
+export const metadata: Metadata = {
+  title: {
+    default: "Talhah Patelia",
+    template: "%s | Talhah Patelia",
+  },
+  description: "Portfolio: awards, projects, and contact.",
+  openGraph: {
+    title: "Talhah Patelia",
+    description: "Awards, projects, and contact.",
+    type: "website",
+  },
+};
 
-export const metadata = {
-  title: 'Talhah Patelia',
-  description: 'My Personal Portfolio',
-}
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-      <Analytics />
+    <html lang="en" className="dark">
+      <body className="min-h-screen bg-zinc-950 text-zinc-100">
+        <SiteHeader />
+        <div className="mx-auto w-full max-w-6xl px-6 py-10">{children}</div>
+      </body>
     </html>
-  )
+  );
 }
