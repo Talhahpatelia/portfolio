@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { awards } from "@/data/awards";
 import CopyLinkButton from "@/components/CopyLinkButton";
+import { getMarkdown } from "@/lib/content";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 type Params = { slug: string };
 
@@ -22,6 +24,7 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
 export default function AwardDetail({ params }: { params: Params }) {
   const a = awards.find((x) => x.slug === params.slug);
   if (!a) return notFound();
+  const md = getMarkdown("awards", params.slug);
 
   return (
     <main className="space-y-6">
@@ -32,7 +35,11 @@ export default function AwardDetail({ params }: { params: Params }) {
         </div>
       </div>
 
-      <p className="max-w-3xl text-[var(--text-muted)]">{a.description ?? a.short}</p>
+      {md ? (
+        <MarkdownRenderer md={md} />
+      ) : (
+        <p className="max-w-3xl text-[var(--text-muted)]">{a.description ?? a.short}</p>
+      )}
 
       <div className="flex flex-wrap gap-2">
         {a.tags.map((t) => (

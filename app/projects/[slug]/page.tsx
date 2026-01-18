@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { projects } from "@/data/projects";
 import CopyLinkButton from "@/components/CopyLinkButton";
+import { getMarkdown } from "@/lib/content";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 type Params = { slug: string };
 
@@ -22,6 +24,7 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
 export default function ProjectDetail({ params }: { params: Params }) {
   const p = projects.find((x) => x.slug === params.slug);
   if (!p) return notFound();
+  const md = getMarkdown("projects", params.slug);
 
   return (
     <main className="space-y-6">
@@ -32,7 +35,11 @@ export default function ProjectDetail({ params }: { params: Params }) {
         </div>
       </div>
 
-      <p className="max-w-3xl text-[var(--text-muted)]">{p.description ?? p.short}</p>
+      {md ? (
+        <MarkdownRenderer md={md} />
+      ) : (
+        <p className="max-w-3xl text-[var(--text-muted)]">{p.description ?? p.short}</p>
+      )}
 
       <div className="flex flex-wrap gap-2">
         {p.tags.map((t) => (
