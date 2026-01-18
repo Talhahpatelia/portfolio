@@ -28,7 +28,7 @@ export default function SiteHeader() {
     }, [index, q, activeTags]);
 
     return (
-        <header className="sticky top-0 z-50 border-b border-[var(--border-soft)] bg-[var(--bg-surface)] backdrop-blur">
+        <header className="top-0 z-50 border-b border-[var(--border-soft)] bg-[var(--bg-surface)] backdrop-blur">
             <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-4">
                 <div className="flex items-center justify-between gap-4">
                     <Link href="/" className="font-semibold tracking-tight text-[var(--text-primary)]">
