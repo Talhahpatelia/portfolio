@@ -4,8 +4,8 @@ import { projects } from "@/data/projects";
 import TileCard from "@/components/TileCard";
 
 export default function HomePage() {
-    const featuredAwards = awards.filter((a) => a.featured);
-    const featuredProjects = projects.filter((p) => p.featured);
+    const featuredAwards = [...awards].reverse().filter((a) => a.featured);
+    const featuredProjects = [...projects].reverse().filter((p) => p.featured);
 
     return (
         <main className="space-y-10">
