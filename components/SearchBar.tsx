@@ -21,7 +21,7 @@ export default function SearchBar({
         ref={inputRef}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="Search awards + projects (e.g. HPC, infusion, proctoring)."
+        placeholder="Search awards + projects"
         className="w-full rounded-xl border border-[var(--border-soft)] bg-[var(--bg-surface)] px-4 py-3
            text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]
            shadow-[var(--shadow-soft)] focus:border-[var(--accent)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
