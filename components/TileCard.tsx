@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import CopyLinkButton from "./CopyLinkButton";
+import { getYear } from "@/lib/date";
 
 type TileSize = "compact" | "long";
 
@@ -9,6 +10,8 @@ export default function TileCard({
   short,
   href,
   tags,
+  date,
+  category,
   image,
   size = "compact",
 }: {
@@ -16,10 +19,13 @@ export default function TileCard({
   short: string;
   href: string;
   tags: string[];
+  date?: string;
+  category?: string;
   image?: { src: string; alt: string };
   size?: TileSize;
 }) {
   const fullUrl = typeof window === "undefined" ? href : `${window.location.origin}${href}`;
+  const year = getYear(date);
 
   return (
     <div className="group rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-surface)] p-4 shadow-[var(--shadow-soft)] transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-muted)]">
@@ -29,6 +35,18 @@ export default function TileCard({
         </Link>
         <CopyLinkButton url={fullUrl} />
       </div>
+
+      {(year || category) && (
+        <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-[var(--text-muted)]">
+          {year && <span>{year}</span>}
+          {year && category && <span aria-hidden="true">/</span>}
+          {category && (
+            <span className="rounded-full border border-[var(--pill-border)] bg-[var(--pill-bg)] px-2 py-0.5 text-[var(--pill-text)]">
+              {category}
+            </span>
+          )}
+        </div>
+      )}
 
       <p className={["mt-2 text-sm text-[var(--text-muted)]", size === "long" ? "" : "line-clamp-2"].join(" ")}>
         {short}

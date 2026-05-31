@@ -7,25 +7,20 @@ import TagPills from "./TagPills";
 import { awards } from "@/data/awards";
 import { projects } from "@/data/projects";
 import { buildSearchIndex, matches } from "@/lib/search";
+import { allCategories } from "@/lib/categories";
 import ThemeToggle from "./ThemeToggle";
 
 export default function SiteHeader() {
     const index = useMemo(() => buildSearchIndex(awards, projects), []);
-    const allTags = useMemo(() => {
-        const s = new Set<string>();
-        [...awards, ...projects].forEach((x) =>
-            x.tags.forEach((t) => s.add(String(t))),
-        );
-        return Array.from(s).sort((a, b) => a.localeCompare(b));
-    }, []);
+    const categories = useMemo(() => allCategories([...awards, ...projects]), []);
 
     const [q, setQ] = useState("");
-    const [activeTags, setActiveTags] = useState<string[]>([]);
+    const [activeCategories, setActiveCategories] = useState<string[]>([]);
 
     const results = useMemo(() => {
-        const filtered = index.filter((doc) => matches(doc, q, activeTags));
+        const filtered = index.filter((doc) => matches(doc, q, activeCategories));
         return filtered.slice(0, 8);
-    }, [index, q, activeTags]);
+    }, [index, q, activeCategories]);
 
     return (
         <header className="top-0 z-50 border-b border-[var(--border-soft)] bg-[var(--bg-surface)] backdrop-blur">
@@ -51,18 +46,23 @@ export default function SiteHeader() {
 
                 <div className="flex flex-col gap-3">
                     <SearchBar value={q} onChange={setQ} results={results} />
-                    <TagPills
-                        tags={allTags}
-                        active={activeTags}
-                        onToggle={(t) =>
-                            setActiveTags((prev) =>
-                                prev.includes(t)
-                                    ? prev.filter((x) => x !== t)
-                                    : [...prev, t],
-                            )
-                        }
-                        onClear={() => setActiveTags([])}
-                    />
+                    <div className="space-y-2">
+                        <div className="text-xs font-medium text-[var(--text-muted)]">
+                            Categories
+                        </div>
+                        <TagPills
+                            tags={categories}
+                            active={activeCategories}
+                            onToggle={(t) =>
+                                setActiveCategories((prev) =>
+                                    prev.includes(t)
+                                        ? prev.filter((x) => x !== t)
+                                        : [...prev, t],
+                                )
+                            }
+                            onClear={() => setActiveCategories([])}
+                        />
+                    </div>
                 </div>
             </div>
         </header>

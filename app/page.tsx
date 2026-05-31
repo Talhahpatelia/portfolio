@@ -2,6 +2,7 @@ import Link from "next/link";
 import { awards } from "@/data/awards";
 import { projects } from "@/data/projects";
 import TileCard from "@/components/TileCard";
+import { primaryCategory } from "@/lib/categories";
 
 export default function HomePage() {
     const featuredAwards = [...awards].reverse().filter((a) => a.featured);
@@ -59,6 +60,8 @@ export default function HomePage() {
                             short={a.short}
                             href={`/awards/${a.slug}`}
                             tags={a.tags}
+                            date={a.date}
+                            category={primaryCategory(a.tags)}
                         />
                     ))}
                 </div>
@@ -84,6 +87,8 @@ export default function HomePage() {
                             short={p.short}
                             href={`/projects/${p.slug}`}
                             tags={p.tags}
+                            date={p.date}
+                            category={primaryCategory(p.tags)}
                         />
                     ))}
                 </div>

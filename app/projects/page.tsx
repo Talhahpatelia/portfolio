@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { projects } from "@/data/projects";
 import TileCard from "@/components/TileCard";
+import { primaryCategory } from "@/lib/categories";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -19,6 +20,8 @@ export default function ProjectsPage() {
             short={p.short}
             href={`/projects/${p.slug}`}
             tags={p.tags}
+            date={p.date}
+            category={primaryCategory(p.tags)}
             size="long"
             image={p.image}
           />

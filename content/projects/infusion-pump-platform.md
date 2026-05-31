@@ -4,10 +4,11 @@ Designing a low-cost infusion pump system with quick-change tubing and variable 
 
 ## Focus Areas
 - Requirements and safety constraints for low-cost infusion.
-- Peristaltic mechanics, cam options, and manufacturable enclosures.
-- Control architecture, alarms, and calibration.
+- Peristaltic mechanics, cam options, tubing replacement, and manufacturable enclosures.
+- Control architecture, alarms, calibration, and repeatable flow testing.
 
-## Stack
+## Current Stack
 - ESP32
 - Motor drivers
-- Mechanical design + CAD
+- Mechanical design and CAD
+- Bench testing workflow

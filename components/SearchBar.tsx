@@ -41,7 +41,9 @@ export default function SearchBar({
             >
               <div className="flex items-center justify-between gap-3">
                 <div className="text-sm font-medium text-[var(--text-primary)]">{r.title}</div>
-                <div className="text-xs text-[var(--text-muted)]">{r.type}</div>
+                <div className="shrink-0 text-xs text-[var(--text-muted)]">
+                  {[r.type, r.year].filter(Boolean).join(" / ")}
+                </div>
               </div>
               <div className="mt-1 text-xs text-[var(--text-muted)]">{r.short}</div>
             </Link>

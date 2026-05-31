@@ -1,5 +1,7 @@
 // lib/search.ts
 import type { AwardItem, ProjectItem } from "@/lib/types";
+import { categoriesForTags } from "@/lib/categories";
+import { getYear } from "@/lib/date";
 
 export type SearchDoc = {
   type: "award" | "project";
@@ -7,6 +9,8 @@ export type SearchDoc = {
   title: string;
   short: string;
   tags: string[];
+  categories: string[];
+  year: string | null;
   href: string;
 };
 
@@ -21,6 +25,8 @@ export function buildSearchIndex(
       title: a.title,
       short: a.short,
       tags: a.tags,
+      categories: categoriesForTags(a.tags),
+      year: getYear(a.date),
       href: `/awards/${a.slug}`,
     })),
     ...projects.map((p) => ({
@@ -29,19 +35,25 @@ export function buildSearchIndex(
       title: p.title,
       short: p.short,
       tags: p.tags,
+      categories: categoriesForTags(p.tags),
+      year: getYear(p.date),
       href: `/projects/${p.slug}`,
     })),
   ];
 }
 
-export function matches(doc: SearchDoc, q: string, activeTags: string[]) {
+export function matches(doc: SearchDoc, q: string, activeCategories: string[]) {
   const query = q.trim().toLowerCase();
-  const hay = `${doc.title} ${doc.short} ${doc.tags.join(" ")}`.toLowerCase();
+  const hay = `${doc.title} ${doc.short} ${doc.year ?? ""} ${doc.tags.join(" ")} ${doc.categories.join(" ")}`.toLowerCase();
 
   const queryOk = query.length === 0 || hay.includes(query);
-  const tagsOk =
-    activeTags.length === 0 ||
-    activeTags.every((t) => doc.tags.map(x => x.toLowerCase()).includes(t.toLowerCase()));
+  const categoriesOk =
+    activeCategories.length === 0 ||
+    activeCategories.every((category) =>
+      doc.categories
+        .map((x) => x.toLowerCase())
+        .includes(category.toLowerCase())
+    );
 
-  return queryOk && tagsOk;
+  return queryOk && categoriesOk;
 }

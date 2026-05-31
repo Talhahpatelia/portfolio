@@ -5,7 +5,7 @@ export const awards: AwardItem[] = [
   // ===== 2018 =====
   {
     slug: "vut-ams-science-fair-2018-first-place",
-    title: "1st Place – VUT / AMS Science Fair",
+    title: "1st Place - VUT / AMS Science Fair",
     short: "3D-printed and programmed a quadruped robot.",
     description:
       "Designed, 3D printed, and programmed a quadruped robot capable of walking, demonstrating early proficiency in robotics, mechanical design, and embedded systems.",
@@ -57,7 +57,7 @@ export const awards: AwardItem[] = [
   // ===== 2019 =====
   {
     slug: "eskom-expo-gold-2019",
-    title: "Gold Award – Eskom Expo Science Fair",
+    title: "Gold Award - Eskom Expo Science Fair",
     short: "Built a fully functional robot.",
     description:
       "Designed, 3D printed, and programmed a complete robotic system integrating mechanical, electronic, and software components.",
@@ -67,7 +67,7 @@ export const awards: AwardItem[] = [
   },
   {
     slug: "vut-cii-science-fair-2019-first-place",
-    title: "1st Place – VUT / CII Science Fair",
+    title: "1st Place - VUT / CII Science Fair",
     short: "First place for advanced robotics project.",
     description:
       "Developed a full robotics solution from concept to execution, earning first place at a national-level science fair.",
@@ -77,7 +77,7 @@ export const awards: AwardItem[] = [
   },
   {
     slug: "gauteng-north-second-best-2019",
-    title: "Overall 2nd Best Project – Gauteng North Science Fair",
+    title: "Overall 2nd Best Project - Gauteng North Science Fair",
     short: "Top-ranked robotics project among 527 entries.",
     description:
       "Designed a cave-traversing robot for exploration scenarios, achieving second overall among 527 participants.",
@@ -88,7 +88,7 @@ export const awards: AwardItem[] = [
   },
   {
     slug: "gauteng-north-gold-2019",
-    title: "Gold Award – Gauteng North Science Fair",
+    title: "Gold Award - Gauteng North Science Fair",
     short: "Gold award for cave exploration robot.",
     description:
       "Recognised with a Gold Award for a robot capable of navigating complex subterranean terrain.",
@@ -98,7 +98,7 @@ export const awards: AwardItem[] = [
   },
   {
     slug: "grottobot-first-place-2019",
-    title: "1st Place – Grottobot Category",
+    title: "1st Place - Grottobot Category",
     short: "Best cave-exploration robotics project.",
     description:
       "Awarded first place in the Grottobot category for a robot designed for cave traversal and data collection.",
@@ -108,7 +108,7 @@ export const awards: AwardItem[] = [
   },
   {
     slug: "north-gauteng-3d-printing-2019",
-    title: "1st Place – 3D Printing Competition",
+    title: "1st Place - 3D Printing Competition",
     short: "Won speed and accuracy-based challenge.",
     description:
       "Programmed slicing and printer workflows to rapidly and accurately manufacture a judged object.",
@@ -118,7 +118,7 @@ export const awards: AwardItem[] = [
   },
   {
     slug: "tadhack-rising-star-2019",
-    title: "Rising Star Award – TADHack",
+    title: "Rising Star Award - TADHack",
     short: "Recognised at a global hackathon.",
     description:
       "Awarded Rising Star at a 72-hour global hackathon for innovation and technical execution.",
@@ -128,7 +128,7 @@ export const awards: AwardItem[] = [
   },
   {
     slug: "principals-award-2019",
-    title: "Principal’s Award – APAX",
+    title: "Principal's Award - APAX",
     short: "Recognised for bringing honour to the school.",
     description:
       "Awarded for exceptional academic, leadership, and co-curricular achievements throughout the year.",
@@ -138,7 +138,7 @@ export const awards: AwardItem[] = [
   },
   {
     slug: "sayess-gold-2019",
-    title: "Gold Award – SAYESS",
+    title: "Gold Award - SAYESS",
     short: "Selected to represent South Africa internationally.",
     description:
       "Developed Scietmeer, a mobile science laboratory robot selected to represent South Africa at IFEST Tunisia.",
@@ -150,7 +150,7 @@ export const awards: AwardItem[] = [
   // ===== 2020 =====
   {
     slug: "ifest-tunisia-silver-2020",
-    title: "Silver Award – IFEST Tunisia",
+    title: "Silver Award - IFEST Tunisia",
     short: "International recognition for Scietmeer.",
     description:
       "Represented South Africa internationally and earned a Silver Award at IFEST Tunisia.",
@@ -160,13 +160,19 @@ export const awards: AwardItem[] = [
   },
   {
     slug: "eskom-expo-gold-2020",
-    title: "Gold Award – Eskom Expo Science Fair",
+    title: "Gold Award - Eskom Expo Science Fair",
     short: "Agribot selected for international representation.",
     description:
       "Developed Agribot, a mobile agricultural science platform selected to represent South Africa internationally.",
     tags: ["Robotics", "Agriculture"],
     date: "2020-08",
     org: "Eskom Holdings SOC Ltd",
+    links: [
+      {
+        label: "Eskom Expo media pack (2021)",
+        href: "https://exposcience.co.za/wp-content/uploads/2023/08/2021-Eskom-Expo-Media-pack-Talhah-Patelia.pdf",
+      },
+    ],
   },
   {
     slug: "tadhack-internship-2020",
@@ -180,7 +186,7 @@ export const awards: AwardItem[] = [
   },
   {
     slug: "community-service-1000-face-shields",
-    title: "Full Colours – Community Service",
+    title: "Full Colours - Community Service",
     short: "3D printed 1,000+ face shields during COVID-19.",
     description:
       "Designed and 3D printed over 1,000 face shields distributed to medical professionals through the Salaam Foundation.",
@@ -193,70 +199,92 @@ export const awards: AwardItem[] = [
   // ===== 2021 =====
   {
     slug: "taiwan-science-fair-silver-2021",
-    title: "Silver Award – Taiwan International Science Fair",
+    title: "Silver Award - Taiwan International Science Fair",
     short: "International award for Agribot.",
     description:
-      "Developed Agribot, a mobile science laboratory for sustainable agriculture, earning a Silver Award.",
+      "Developed Agribot, a mobile science laboratory for sustainable agriculture. The Taiwan International Science Fair abstract lists the project in the Engineering category with Talhah Patelia and Zayd Kara as authors.",
     tags: ["International", "Robotics"],
     date: "2021-02",
     org: "Taiwan International Science Fair",
+    links: [
+      {
+        label: "TISF Agribot abstract (2021)",
+        href: "https://twsf.ntsec.gov.tw/activity/race-2/2021/pdf/100045.pdf",
+      },
+    ],
   },
   {
     slug: "top-15-young-geeks-2021",
     title: "Top 15 Young Geeks South Africa",
     short: "Named among the Top 15 Young Geeks nationally.",
     description:
-      "Recognised by industry leaders for impact in technology, innovation, and the digital economy.",
+      "Recognised by Geekulcha in 2021 for impact in technology, innovation, and the digital economy.",
     tags: ["Recognition"],
     date: "2021-06",
     org: "Geekulcha",
+    links: [
+      {
+        label: "ITWeb article (2021)",
+        href: "https://www.itweb.co.za/article/geekulcha-names-2021-top-15-young-geeks/GxwQDM1ZRWEqlPVo",
+      },
+    ],
     featured: true,
   },
   {
     slug: "tadhack-winner-2021",
-    title: "Winner – TADHack (South Africa)",
-    short: "Youngest winner nationally and globally.",
+    title: "Winner - TADHack South Africa",
+    short: "Won nationally with Maftuha.",
     description:
-      "Developed Maftuha, an EdTech platform integrating facial recognition and sentiment analysis.",
-    tags: ["EdTech", "AI"],
+      "Developed Maftuha, an institutional EdTech platform integrating exam workflows, facial recognition, screen monitoring, sentiment analysis, and secure communication.",
+    tags: ["EdTech", "AI/ML"],
     date: "2021-09",
     org: "TADHack",
+    links: [
+      {
+        label: "TADHack South Africa winner article (2021)",
+        href: "https://blog.tadhack.com/2021/10/14/tadhack-south-africa-winner-maftuha/",
+      },
+      {
+        label: "TADHack Global 2021 summary",
+        href: "https://blog.tadhack.com/2021/09/26/tadhack-global-2021-summary/",
+      },
+    ],
   },
 
   // ===== 2023 =====
   {
     slug: "ewb-top-10-project-2023",
-    title: "Top 10 Project – Engineers Without Borders",
+    title: "Top 10 Project - Engineers Without Borders",
     short: "Sustainable housing using recycled materials.",
     description:
-      "Designed affordable housing for migrants using recycled plastics and bottles, selected among the top projects from ~1,400 students.",
+      "Designed affordable housing for migrants using recycled plastics and bottles, selected among the top projects from roughly 1,400 students.",
     tags: ["Sustainability", "Engineering"],
     date: "2023-07",
     org: "University of the Witwatersrand",
   },
   {
     slug: "ieee-entrepreneurship-prospectors-2023",
-    title: "1st Place – IEEE Entrepreneurship Prospectors Workshop",
+    title: "1st Place - IEEE Entrepreneurship Prospectors Workshop",
     short: "Won 1st place at Wits Innovation Centre.",
     description:
-      "Built and presented a venture concept focused on innovation and entrepreneurship alongside Jesse Thornburg.",
+      "Won first place with Jesse Thornburg for Gotcha, an EdTech venture focused on autonomous cheat detection for online and offline exams.",
     tags: ["Startup", "Entrepreneurship"],
     date: "2023-07",
     org: "IEEE Entrepreneurship / Wits Innovation Centre",
     links: [
       {
-        label: "IEEE article",
+        label: "IEEE Entrepreneurship article (2023)",
         href: "https://entrepreneurship.ieee.org/2023_07_21_ieee-entrepreneurship-hosts-successful-workshop-at-wits-university-south-africa/",
       },
     ],
   },
   {
     slug: "best-coder-adaptit-2023",
-    title: "Best Coder – Adapt IT Hackathon",
+    title: "Best Coder - Adapt IT Hackathon",
     short: "ML-based pothole detection system.",
     description:
       "Developed an embedded ML system to detect potholes and predict road decay, earning Best Coder recognition.",
-    tags: ["Machine Learning", "Embedded"],
+    tags: ["AI/ML", "Embedded"],
     date: "2023-08",
     org: "Adapt IT / University of the Witwatersrand",
   },
@@ -274,7 +302,7 @@ export const awards: AwardItem[] = [
   },
   {
     slug: "allan-gray-gotchaexam-funding",
-    title: "R100,000 Startup Funding – GotchaExam",
+    title: "R100,000 Startup Funding - GotchaExam",
     short: "Secured funding at AGOF Jamboree.",
     description:
       "Awarded R100,000 in startup funding after pitching GotchaExam to an expert judging panel.",
@@ -288,50 +316,58 @@ export const awards: AwardItem[] = [
     title: "CHPC National Conference Selection",
     short: "Represented Wits in HPC systems competition.",
     description:
-      "Selected to represent Wits at the CHPC National Conference after winning a competitive HPC challenge.",
+      "Selected to represent Wits at the CHPC National Conference through the South African National Student Cluster Competition.",
     tags: ["HPC"],
     date: "2024-08",
     org: "Centre for High Performance Computing",
   },
-
-  // ===== 2025 =====
   {
     slug: "afretec-nairobi-first-place-2024",
-    title: "1st Place – AFRETEC Makerthon (University of Nairobi)",
+    title: "1st Place - AFRETEC Makerthon (University of Nairobi)",
     short: "Decentralised agricultural storage platform.",
     description:
-      "Led development of a digital and physical infrastructure system addressing post-harvest losses for small-scale farmers.",
+      "Led development of a digital and physical infrastructure system addressing post-harvest losses for small-scale farmers during the 2024 University of Nairobi AFRETEC Student Makerthon.",
     tags: ["Agriculture", "Sustainability"],
     date: "2024-10",
     org: "AFRETEC / University of Nairobi",
     links: [
       {
-        label: "AFRETEC article",
+        label: "AFRETEC UoN Makerthon article (2024)",
         href: "https://afretec.uonbi.ac.ke/afretec-uon-student-makerthon-2024-a-showcase-of-innovation-and-collaboration/",
       },
     ],
     featured: true,
   },
+
+  // ===== 2025 =====
   {
     slug: "asc-top-25-global-2025",
-    title: "Top 25 Teams – ASC Student Supercomputer Challenge",
+    title: "Top 25 Teams - ASC Student Supercomputer Challenge",
     short: "Global finalist in student supercomputing.",
     description:
-      "Designed and optimised an HPC cluster and scientific pipelines, qualifying among the top 25 teams globally.",
+      "Designed and optimised an HPC cluster and scientific pipelines, qualifying Wits among the Top 25 teams for the 2025 ASC Student Supercomputer Challenge final round.",
     tags: ["HPC", "International"],
     date: "2025-03",
     org: "ASC",
+    links: [
+      { label: "Wits HPC ASC25 site", href: "https://asc.witshpc.com/" },
+      {
+        label: "ASC25 preliminary result",
+        href: "https://www.asc-events.net/StudentChallenge/ASC25/preliminary-result.php",
+      },
+    ],
     featured: true,
   },
   {
     slug: "deans-award-hpc-2025",
-    title: "Dean’s Award – Wits",
-    short: "Full Master’s tuition bursary awarded.",
+    title: "Dean's Award - Wits",
+    short: "Full Master's tuition bursary awarded.",
     description:
-      "Awarded a full tuition bursary for outstanding performance in national and international supercomputing competitions.",
+      "Awarded a full tuition bursary for outstanding performance in national and international student supercomputing competitions.",
     tags: ["Academic", "HPC"],
     date: "2025-08",
     org: "University of the Witwatersrand",
+    links: [{ label: "Wits HPC ASC25 site", href: "https://asc.witshpc.com/" }],
     featured: true,
   },
 ];

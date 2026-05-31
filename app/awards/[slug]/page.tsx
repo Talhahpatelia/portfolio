@@ -4,6 +4,8 @@ import { awards } from "@/data/awards";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import { getMarkdown } from "@/lib/content";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
+import { primaryCategory } from "@/lib/categories";
+import { getYear } from "@/lib/date";
 
 type Params = { slug: string };
 
@@ -25,6 +27,11 @@ export default function AwardDetail({ params }: { params: Params }) {
   const a = awards.find((x) => x.slug === params.slug);
   if (!a) return notFound();
   const md = getMarkdown("awards", params.slug);
+  const meta = [
+    ["Year", getYear(a.date)],
+    ["Category", primaryCategory(a.tags)],
+    ["Organisation", a.org],
+  ].filter(([, value]) => Boolean(value));
 
   return (
     <main className="space-y-6">
@@ -34,6 +41,18 @@ export default function AwardDetail({ params }: { params: Params }) {
           <CopyLinkButton url={`/awards/${a.slug}`} />
         </div>
       </div>
+
+      <dl className="flex flex-wrap gap-2 text-sm text-[var(--text-muted)]">
+        {meta.map(([label, value]) => (
+          <div
+            key={label}
+            className="rounded-full border border-[var(--border-soft)] bg-[var(--bg-surface)] px-3 py-1"
+          >
+            <dt className="inline text-[var(--text-muted)]">{label}: </dt>
+            <dd className="inline text-[var(--text-primary)]">{value}</dd>
+          </div>
+        ))}
+      </dl>
 
       {md ? (
         <MarkdownRenderer md={md} />

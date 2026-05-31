@@ -13,7 +13,7 @@ export default function TagPills({
 }) {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      {tags.slice(0, 24).map((t) => {
+      {tags.map((t) => {
         const isOn = active.includes(t);
         return (
           <button
