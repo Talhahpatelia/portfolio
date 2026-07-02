@@ -88,3 +88,22 @@ export function primaryCategory(tags: Tag[]) {
 export function allCategories(items: Pick<BaseItem, "tags">[]) {
   return sortCategories(items.flatMap((item) => categoriesForTags(item.tags)));
 }
+
+export function categoriesFromParam(value?: string | string[]) {
+  const rawValues = Array.isArray(value) ? value : value ? [value] : [];
+  const categories = rawValues
+    .flatMap((item) => item.split(","))
+    .map((item) => item.trim())
+    .filter(Boolean);
+
+  return sortCategories(categories);
+}
+
+export function matchesCategoryFilter(
+  item: Pick<BaseItem, "tags">,
+  selectedCategories: string[],
+) {
+  if (selectedCategories.length === 0) return true;
+  const itemCategories = categoriesForTags(item.tags);
+  return selectedCategories.some((category) => itemCategories.includes(category));
+}

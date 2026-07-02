@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
+import Icon from "./Icon";
 import CopyLinkButton from "./CopyLinkButton";
-import { getYear } from "@/lib/date";
+import { formatDate } from "@/lib/date";
 
 type TileSize = "compact" | "long";
 
@@ -12,7 +12,10 @@ export default function TileCard({
   tags,
   date,
   category,
-  image,
+  description,
+  stage,
+  role,
+  proofCount = 0,
   size = "compact",
 }: {
   title: string;
@@ -22,26 +25,36 @@ export default function TileCard({
   date?: string;
   category?: string;
   image?: { src: string; alt: string };
+  description?: string;
+  stage?: string;
+  role?: string;
+  proofCount?: number;
   size?: TileSize;
 }) {
-  const fullUrl = typeof window === "undefined" ? href : `${window.location.origin}${href}`;
-  const year = getYear(date);
+  const displayDate = formatDate(date);
 
   return (
-    <div className="group rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-surface)] p-4 shadow-[var(--shadow-soft)] transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-muted)]">
+    <article className="group rounded-lg border border-[var(--border-soft)] bg-[var(--bg-surface)] p-4 shadow-[var(--shadow-soft)] transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-muted)]">
       <div className="flex items-start justify-between gap-3">
-        <Link href={href} className="text-base font-semibold leading-snug text-[var(--text-primary)] hover:underline">
-          {title}
-        </Link>
-        <CopyLinkButton url={fullUrl} />
+        <div className="min-w-0">
+          <Link href={href} className="group/link inline-flex items-start gap-2 text-base font-semibold leading-snug text-[var(--text-primary)] hover:underline">
+            <span>{title}</span>
+            <Icon name="arrow-up-right" className="mt-0.5 h-4 w-4 shrink-0 opacity-0 transition group-hover/link:opacity-100" />
+          </Link>
+        </div>
+        <CopyLinkButton url={href} />
       </div>
 
-      {(year || category) && (
+      {(displayDate || category) && (
         <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-[var(--text-muted)]">
-          {year && <span>{year}</span>}
-          {year && category && <span aria-hidden="true">/</span>}
+          {displayDate && (
+            <span className="inline-flex items-center gap-1">
+              <Icon name="calendar" className="h-3.5 w-3.5" />
+              {displayDate}
+            </span>
+          )}
           {category && (
-            <span className="rounded-full border border-[var(--pill-border)] bg-[var(--pill-bg)] px-2 py-0.5 text-[var(--pill-text)]">
+            <span className="rounded-md border border-[var(--pill-border)] bg-[var(--pill-bg)] px-2 py-0.5 text-[var(--pill-text)]">
               {category}
             </span>
           )}
@@ -52,9 +65,31 @@ export default function TileCard({
         {short}
       </p>
 
-      {image && size === "long" && (
-        <div className="mt-3 overflow-hidden rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface-muted)]">
-          <Image src={image.src} alt={image.alt} width={1200} height={630} className="h-auto w-full" />
+      {size === "long" && description && (
+        <p className="mt-2 line-clamp-3 text-sm leading-6 text-[var(--text-muted)]">
+          {description}
+        </p>
+      )}
+
+      {(stage || role || proofCount > 0) && (
+        <div className="mt-3 flex flex-wrap gap-2 text-xs text-[var(--text-muted)]">
+          {stage && (
+            <span className="inline-flex items-center gap-1 rounded-md border border-[var(--border-soft)] bg-[var(--bg-surface-muted)] px-2 py-1">
+              <Icon name="layers" className="h-3.5 w-3.5" />
+              {stage}
+            </span>
+          )}
+          {role && (
+            <span className="rounded-md border border-[var(--border-soft)] bg-[var(--bg-surface-muted)] px-2 py-1">
+              {role}
+            </span>
+          )}
+          {proofCount > 0 && (
+            <span className="inline-flex items-center gap-1 rounded-md border border-[var(--proof-border)] bg-[var(--proof-bg)] px-2 py-1 text-[var(--proof-text)]">
+              <Icon name="shield" className="h-3.5 w-3.5" />
+              {proofCount} proof {proofCount === 1 ? "link" : "links"}
+            </span>
+          )}
         </div>
       )}
 
@@ -62,12 +97,12 @@ export default function TileCard({
         {tags.slice(0, 6).map((t) => (
           <span
             key={t}
-            className="rounded-full border border-[var(--pill-border)] bg-[var(--pill-bg)] px-2 py-0.5 text-xs text-[var(--pill-text)] transition hover:border-[var(--border-strong)]"
+            className="rounded-md border border-[var(--pill-border)] bg-[var(--pill-bg)] px-2 py-0.5 text-xs text-[var(--pill-text)] transition hover:border-[var(--border-strong)]"
           >
             {t}
           </span>
         ))}
       </div>
-    </div>
+    </article>
   );
 }

@@ -1,10 +1,11 @@
 // lib/search.ts
 import type { AwardItem, ProjectItem } from "@/lib/types";
+import type { BlogPost } from "@/data/blog";
 import { categoriesForTags } from "@/lib/categories";
 import { getYear } from "@/lib/date";
 
 export type SearchDoc = {
-  type: "award" | "project";
+  type: "award" | "project" | "blog";
   slug: string;
   title: string;
   short: string;
@@ -16,7 +17,8 @@ export type SearchDoc = {
 
 export function buildSearchIndex(
   awards: AwardItem[],
-  projects: ProjectItem[]
+  projects: ProjectItem[],
+  blogPosts: BlogPost[] = []
 ): SearchDoc[] {
   return [
     ...awards.map((a) => ({
@@ -38,6 +40,16 @@ export function buildSearchIndex(
       categories: categoriesForTags(p.tags),
       year: getYear(p.date),
       href: `/projects/${p.slug}`,
+    })),
+    ...blogPosts.map((post) => ({
+      type: "blog" as const,
+      slug: post.slug,
+      title: post.title,
+      short: post.short,
+      tags: post.tags,
+      categories: categoriesForTags(post.tags),
+      year: getYear(post.date),
+      href: `/blog/${post.slug}`,
     })),
   ];
 }

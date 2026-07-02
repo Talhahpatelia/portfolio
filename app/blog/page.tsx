@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { projects } from "@/data/projects";
+import { blogPosts } from "@/data/blog";
 import Icon, { type IconName } from "@/components/Icon";
 import TileCard from "@/components/TileCard";
 import { categoriesFromParam, matchesCategoryFilter, primaryCategory } from "@/lib/categories";
@@ -17,20 +17,20 @@ export function generateMetadata({
 }): Metadata {
   const selectedCategories = categoriesFromParam(searchParams.category);
   const filtered = selectedCategories.length > 0;
-  const title = filtered ? `Projects: ${selectedCategories.join(", ")}` : "Projects";
+  const title = filtered ? `Blog: ${selectedCategories.join(", ")}` : "Blog";
   const description = filtered
-    ? `Filtered project archive for Talhah Patelia covering ${selectedCategories.join(", ")} with stages, dates, stack details, and proof links.`
-    : "Project archive for Talhah Patelia with current work, dates, stages, technology stacks, and public proof links.";
+    ? `Filtered writing archive for Talhah Patelia covering ${selectedCategories.join(", ")}.`
+    : "Engineering notes from Talhah Patelia on offline-first systems, education technology, transport, proof-led portfolios, and product lessons.";
 
   return {
     title,
     description,
-    alternates: { canonical: "/projects" },
+    alternates: { canonical: "/blog" },
     robots: filtered ? { index: false, follow: true } : undefined,
     openGraph: {
       title,
       description,
-      url: `${siteConfig.url}/projects`,
+      url: `${siteConfig.url}/blog`,
       type: "website",
       images: [defaultOgImage],
     },
@@ -43,33 +43,28 @@ export function generateMetadata({
   };
 }
 
-export default function ProjectsPage({
+export default function BlogPage({
   searchParams = {},
 }: {
   searchParams?: ArchiveSearchParams;
 }) {
   const selectedCategories = categoriesFromParam(searchParams.category);
-  const visibleProjects = byNewest(projects).filter((project) =>
-    matchesCategoryFilter(project, selectedCategories),
-  );
-  const publicSignals = visibleProjects.reduce((total, project) => total + countPublicSignals(project), 0);
-  const activeProjects = visibleProjects.filter((project) =>
-    ["Validation", "MVP", "Scaling"].includes(project.stage),
-  );
-  const metrics: { label: string; value: number; icon: IconName }[] = [
-    { label: selectedCategories.length ? "Showing" : "Projects", value: visibleProjects.length, icon: "folder" },
-    { label: "Active", value: activeProjects.length, icon: "briefcase" },
-    { label: "Signals", value: publicSignals, icon: "shield" },
+  const posts = byNewest(blogPosts).filter((post) => matchesCategoryFilter(post, selectedCategories));
+  const proofSignals = posts.reduce((total, post) => total + countPublicSignals(post), 0);
+  const metrics: { label: string; value: string | number; icon: IconName }[] = [
+    { label: selectedCategories.length ? "Showing" : "Posts", value: posts.length, icon: "book-open" },
+    { label: "Signals", value: proofSignals, icon: "shield" },
+    { label: "Format", value: "MD", icon: "clock" },
   ];
   const itemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Talhah Patelia project archive",
-    itemListElement: visibleProjects.map((project, index) => ({
+    name: "Talhah Patelia blog archive",
+    itemListElement: posts.map((post, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      url: absoluteUrl(`/projects/${project.slug}`),
-      name: project.title,
+      url: absoluteUrl(`/blog/${post.slug}`),
+      name: post.title,
     })),
   };
 
@@ -80,18 +75,17 @@ export default function ProjectsPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
       />
 
-      <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
+      <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
         <div>
           <div className="text-sm font-semibold uppercase tracking-wide text-[var(--accent)]">
-            Project Archive
+            Blog
           </div>
           <h1 className="mt-1 text-3xl font-semibold text-[var(--text-primary)]">
-            Projects with stage, stack, date, and proof
+            Notes on what I am building and learning
           </h1>
           <p className="mt-3 max-w-3xl leading-7 text-[var(--text-muted)]">
-            Current builds are mixed with older engineering, robotics, software,
-            HPC, and entrepreneurship work. Each card shows the fastest path to
-            context and public evidence.
+            Short, evidence-aware writing about products, engineering decisions,
+            competitions, and the ideas behind the portfolio.
           </p>
         </div>
         <div className="grid grid-cols-3 gap-3">
@@ -108,41 +102,39 @@ export default function ProjectsPage({
       {selectedCategories.length > 0 && (
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[var(--border-soft)] bg-[var(--bg-surface)] p-4 text-sm shadow-[var(--shadow-soft)]">
           <div className="text-[var(--text-muted)]">
-            Filtering projects by{" "}
+            Filtering blog posts by{" "}
             <span className="font-medium text-[var(--text-primary)]">
               {selectedCategories.join(", ")}
             </span>
             .
           </div>
-          <Link href="/projects" className="font-medium text-[var(--text-primary)] underline underline-offset-4">
+          <Link href="/blog" className="font-medium text-[var(--text-primary)] underline underline-offset-4">
             Clear filters
           </Link>
         </div>
       )}
 
       <div className="grid gap-4 md:grid-cols-2">
-        {visibleProjects.map((project) => (
+        {posts.map((post) => (
           <TileCard
-            key={project.slug}
-            title={project.title}
-            short={project.short}
-            description={project.description}
-            href={`/projects/${project.slug}`}
-            tags={project.tags}
-            date={project.date}
-            category={primaryCategory(project.tags)}
+            key={post.slug}
+            title={post.title}
+            short={post.short}
+            description={post.description}
+            href={`/blog/${post.slug}`}
+            tags={post.tags}
+            date={post.date}
+            category={primaryCategory(post.tags)}
             size="long"
-            image={project.image}
-            stage={project.stage}
-            role={project.role}
-            proofCount={countPublicSignals(project)}
+            stage={post.readingTime}
+            proofCount={countPublicSignals(post)}
           />
         ))}
       </div>
 
-      {visibleProjects.length === 0 && (
+      {posts.length === 0 && (
         <div className="rounded-lg border border-[var(--border-soft)] bg-[var(--bg-surface)] p-5 text-sm text-[var(--text-muted)] shadow-[var(--shadow-soft)]">
-          No projects match the selected filters.
+          No blog posts match the selected filters.
         </div>
       )}
     </main>

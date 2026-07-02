@@ -15,6 +15,7 @@ export type Tag =
 export type LinkItem = {
   label: string;
   href: string;
+  kind?: "Live" | "Proof" | "Press" | "Store" | "Document" | "Source" | "Beta";
 };
 
 export type BaseItem = {
@@ -30,11 +31,12 @@ export type BaseItem = {
   };
   links?: LinkItem[];
   featured?: boolean;
+  role?: string;
+  impact?: string;
 };
 
 export type AwardItem = BaseItem & {
   org?: string;
-  role?: string;
   stack?: string[];
 };
 

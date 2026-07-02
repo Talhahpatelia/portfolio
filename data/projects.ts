@@ -33,10 +33,12 @@ export const projects: ProjectItem[] = [
       {
         label: "TADHack South Africa winner article (2021)",
         href: "https://blog.tadhack.com/2021/10/14/tadhack-south-africa-winner-maftuha/",
+        kind: "Proof",
       },
       {
         label: "TADHack Global 2021 summary",
         href: "https://blog.tadhack.com/2021/09/26/tadhack-global-2021-summary/",
+        kind: "Proof",
       },
     ],
   },
@@ -52,10 +54,12 @@ export const projects: ProjectItem[] = [
     funding: "Funded", // R100k startup funding (AGOF), kept as portfolio-supplied context.
     stack: ["React Native", "Node.js", "Supabase"],
     links: [
-      { label: "Website", href: "https://gotchaexam.com/" },
+      { label: "GotchaExam website", href: "https://www.gotchaexam.com/", kind: "Live" },
+      { label: "GotchaEducation company site", href: "https://www.gotchaeducation.com/", kind: "Live" },
       {
         label: "IEEE Entrepreneurship article (2023)",
         href: "https://entrepreneurship.ieee.org/2023_07_21_ieee-entrepreneurship-hosts-successful-workshop-at-wits-university-south-africa/",
+        kind: "Proof",
       },
     ],
     featured: true,
@@ -163,6 +167,7 @@ export const projects: ProjectItem[] = [
       {
         label: "Taiwan International Science Fair abstract (2021)",
         href: "https://twsf.ntsec.gov.tw/activity/race-2/2021/pdf/100045.pdf",
+        kind: "Proof",
       },
     ],
     featured: true,
@@ -208,6 +213,7 @@ export const projects: ProjectItem[] = [
       {
         label: "AFRETEC UoN Makerthon article (2024)",
         href: "https://afretec.uonbi.ac.ke/afretec-uon-student-makerthon-2024-a-showcase-of-innovation-and-collaboration/",
+        kind: "Proof",
       },
     ],
   },
@@ -237,10 +243,11 @@ export const projects: ProjectItem[] = [
     funding: "None",
     stack: ["Linux", "Slurm", "MPI", "Benchmarking"],
     links: [
-      { label: "Wits HPC ASC25 site", href: "https://asc.witshpc.com/" },
+      { label: "Wits HPC ASC25 site", href: "https://asc.witshpc.com/", kind: "Proof" },
       {
         label: "ASC25 preliminary result",
         href: "https://www.asc-events.net/StudentChallenge/ASC25/preliminary-result.php",
+        kind: "Proof",
       },
     ],
   },
@@ -268,5 +275,78 @@ export const projects: ProjectItem[] = [
     stage: "Completed",
     funding: "None",
     stack: ["MEMS microphone", "Goertzel", "PID control", "PWM motor control"],
+  },
+
+  // ===== Current Work =====
+  {
+    slug: "gotchaeducation-platform",
+    title: "GotchaEducation - Offline-First Education Software",
+    short:
+      "Live education software and consulting across Hifz, exams, community service, LMS, tutoring, and school operations.",
+    description:
+      "Current company and product direction for offline-first education systems. GotchaEducation supports real learner workflows through reusable SaaS products and custom education software for institutions that need practical online and offline delivery.",
+    tags: ["EdTech", "Software", "Startup", "Impact"],
+    date: "2026-07",
+    stage: "Scaling",
+    funding: "Bootstrapped",
+    role: "Founder",
+    impact: "100+ students supported across active education workflows and pilots.",
+    stack: ["React Native", "Next.js", "Firebase", "Supabase", "Offline-first architecture"],
+    links: [
+      {
+        label: "GotchaEducation company site",
+        href: "https://www.gotchaeducation.com/",
+        kind: "Live",
+      },
+      {
+        label: "Hifz App product site",
+        href: "https://hifz.gotchaeducation.com/",
+        kind: "Live",
+      },
+      {
+        label: "GotchaExam product site",
+        href: "https://www.gotchaexam.com/",
+        kind: "Live",
+      },
+      {
+        label: "Community Service App product page",
+        href: "https://www.gotchaeducation.com/products/community-service-app",
+        kind: "Live",
+      },
+    ],
+    featured: true,
+  },
+  {
+    slug: "navigotransport-campus-transit",
+    title: "NavigoTransport - Offline-First Campus Transit",
+    short:
+      "Private-beta Wits shuttle app with on-device routing, offline timetables, reminders, safety, and lost-and-found flows.",
+    description:
+      "Current transport product focused on making campus shuttle movement predictable for Wits students. The app computes trips on-device, keeps routes and timetables available offline, and includes student-facing service alerts, reminders, campus security, and lost-and-found workflows.",
+    tags: ["Transport", "Mobile", "Software", "Infrastructure"],
+    date: "2026-06",
+    stage: "MVP",
+    funding: "Bootstrapped",
+    role: "Co-founder",
+    impact: "Live Android listing and iOS TestFlight beta for Wits campus transit.",
+    stack: ["React Native", "Expo", "On-device routing", "Offline maps", "Push notifications"],
+    links: [
+      {
+        label: "NavigoTransport website",
+        href: "https://www.navigotransport.com/",
+        kind: "Live",
+      },
+      {
+        label: "Google Play listing",
+        href: "https://play.google.com/store/apps/details?id=com.navigotransport.app&pcampaignid=web_share",
+        kind: "Store",
+      },
+      {
+        label: "iOS TestFlight beta",
+        href: "https://testflight.apple.com/join/vK7WpcnY",
+        kind: "Beta",
+      },
+    ],
+    featured: true,
   },
 ];

@@ -27,7 +27,7 @@ export const contact: ContactItem[] = [
     label: "Student Email",
     value: "2658126@students.wits.ac.za",
     href: "mailto:2658126@students.wits.ac.za",
-    description: "University of the Witwatersrand",
+    description: "4th-year Electrical and Information Engineering, University of the Witwatersrand",
   },
   {
     label: "Business Email",

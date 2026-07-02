@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="TP app icon">
+  <rect x="24" y="24" width="464" height="464" rx="116" fill="#050505"/>
+  <rect x="62" y="62" width="388" height="388" rx="88" fill="none" stroke="#ffffff" stroke-opacity="0.14" stroke-width="2"/>
+  <path d="M104 138h158v39h-58v199h-42V177h-58z" fill="#ffffff"/>
+  <path fill="#ffffff" fill-rule="evenodd" d="M286 136h76c55 0 90 35 90 88s-35 88-90 88h-34v64h-42zm42 39v98h32c31 0 50-18 50-49s-19-49-50-49z"/>
+  <path d="M104 400h304" stroke="#ffffff" stroke-opacity="0.2" stroke-width="14" stroke-linecap="round"/>
+</svg>

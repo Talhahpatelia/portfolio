@@ -171,6 +171,7 @@ export const awards: AwardItem[] = [
       {
         label: "Eskom Expo media pack (2021)",
         href: "https://exposcience.co.za/wp-content/uploads/2023/08/2021-Eskom-Expo-Media-pack-Talhah-Patelia.pdf",
+        kind: "Document",
       },
     ],
   },
@@ -210,6 +211,7 @@ export const awards: AwardItem[] = [
       {
         label: "TISF Agribot abstract (2021)",
         href: "https://twsf.ntsec.gov.tw/activity/race-2/2021/pdf/100045.pdf",
+        kind: "Proof",
       },
     ],
   },
@@ -226,6 +228,7 @@ export const awards: AwardItem[] = [
       {
         label: "ITWeb article (2021)",
         href: "https://www.itweb.co.za/article/geekulcha-names-2021-top-15-young-geeks/GxwQDM1ZRWEqlPVo",
+        kind: "Press",
       },
     ],
     featured: true,
@@ -243,10 +246,12 @@ export const awards: AwardItem[] = [
       {
         label: "TADHack South Africa winner article (2021)",
         href: "https://blog.tadhack.com/2021/10/14/tadhack-south-africa-winner-maftuha/",
+        kind: "Proof",
       },
       {
         label: "TADHack Global 2021 summary",
         href: "https://blog.tadhack.com/2021/09/26/tadhack-global-2021-summary/",
+        kind: "Proof",
       },
     ],
   },
@@ -275,8 +280,13 @@ export const awards: AwardItem[] = [
       {
         label: "IEEE Entrepreneurship article (2023)",
         href: "https://entrepreneurship.ieee.org/2023_07_21_ieee-entrepreneurship-hosts-successful-workshop-at-wits-university-south-africa/",
+        kind: "Proof",
       },
     ],
+    image: {
+      src: "/awards/IEEE-Entreprenrship-Wits-Workshop-1024x428.jpg",
+      alt: "Participants at the IEEE Entrepreneurship workshop at Wits University",
+    },
   },
   {
     slug: "best-coder-adaptit-2023",
@@ -334,6 +344,7 @@ export const awards: AwardItem[] = [
       {
         label: "AFRETEC UoN Makerthon article (2024)",
         href: "https://afretec.uonbi.ac.ke/afretec-uon-student-makerthon-2024-a-showcase-of-innovation-and-collaboration/",
+        kind: "Proof",
       },
     ],
     featured: true,
@@ -350,10 +361,11 @@ export const awards: AwardItem[] = [
     date: "2025-03",
     org: "ASC",
     links: [
-      { label: "Wits HPC ASC25 site", href: "https://asc.witshpc.com/" },
+      { label: "Wits HPC ASC25 site", href: "https://asc.witshpc.com/", kind: "Proof" },
       {
         label: "ASC25 preliminary result",
         href: "https://www.asc-events.net/StudentChallenge/ASC25/preliminary-result.php",
+        kind: "Proof",
       },
     ],
     featured: true,
@@ -367,7 +379,11 @@ export const awards: AwardItem[] = [
     tags: ["Academic", "HPC"],
     date: "2025-08",
     org: "University of the Witwatersrand",
-    links: [{ label: "Wits HPC ASC25 site", href: "https://asc.witshpc.com/" }],
+    links: [{ label: "Wits HPC ASC25 site", href: "https://asc.witshpc.com/", kind: "Proof" }],
+    image: {
+      src: "/awards/deens-award-1.jpeg",
+      alt: "Dean's Award certificate from the University of the Witwatersrand",
+    },
     featured: true,
   },
 ];
