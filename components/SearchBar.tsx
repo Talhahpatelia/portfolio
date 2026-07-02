@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Search } from "lucide-react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { SearchDoc } from "@/lib/search";
 
 export default function SearchBar({
@@ -17,7 +17,19 @@ export default function SearchBar({
   showResults?: boolean;
 }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const shouldShowResults = value.trim().length > 0 || showResults;
+  const [isOpen, setIsOpen] = useState(false);
+  const [suppressUntilEdit, setSuppressUntilEdit] = useState(false);
+  const hasQuery = value.trim().length > 0;
+  const shouldShowResults = isOpen && !suppressUntilEdit && (hasQuery || showResults);
+
+  useEffect(() => {
+    if (!hasQuery && !showResults) {
+      setSuppressUntilEdit(false);
+      setIsOpen(false);
+    } else if (!suppressUntilEdit) {
+      setIsOpen(true);
+    }
+  }, [hasQuery, showResults, suppressUntilEdit]);
 
   return (
     <div className="relative">
@@ -28,7 +40,14 @@ export default function SearchBar({
       <input
         ref={inputRef}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => {
+          setSuppressUntilEdit(false);
+          setIsOpen(true);
+          onChange(e.target.value);
+        }}
+        onFocus={() => {
+          if (!suppressUntilEdit && (hasQuery || showResults)) setIsOpen(true);
+        }}
         placeholder="Search proof, work, writing"
         className="w-full rounded-md border border-[var(--border-soft)] bg-[var(--bg-surface)] px-9 py-3
            text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]
@@ -42,6 +61,8 @@ export default function SearchBar({
               key={`${r.type}:${r.slug}`}
               href={r.href}
               onClick={() => {
+                setSuppressUntilEdit(true);
+                setIsOpen(false);
                 onChange("");
                 inputRef.current?.blur();
               }}
