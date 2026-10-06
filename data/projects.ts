@@ -1,352 +1,311 @@
-// data/projects.ts
+import { images } from "@/data/images";
 import type { ProjectItem } from "@/lib/types";
 
+/**
+ * Projects, newest first when displayed.
+ * An entry has its own page only when content/projects/<slug>.md exists.
+ */
 export const projects: ProjectItem[] = [
-  // ===== Healthcare / Medical =====
-  {
-    slug: "infusion-pump-platform",
-    title: "Infusion Pump Platform (Peristaltic + Control)",
-    short:
-      "Low-cost infusion pump platform with quick-change tubing and variable flow control.",
-    description:
-      "Early-stage healthcare hardware project focused on an affordable, locally manufacturable infusion pump platform. Work includes requirements definition, pump mechanics, control architecture, safety constraints, calibration, alarms, and manufacturable design.",
-    tags: ["Medical", "Embedded", "CAD", "Research"],
-    date: "2025",
-    stage: "Validation",
-    funding: "Bootstrapped",
-    stack: ["ESP32", "Motor drivers", "Mechanical design", "CAD"],
-  },
-
-  // ===== EdTech / Startup =====
-  {
-    slug: "maftuha-edtech-platform",
-    title: "Maftuha Institutional EdTech Platform",
-    short: "Institution, classroom, exam, invigilation, marking, and secure chat platform.",
-    description:
-      "Built an all-in-one EdTech platform for institutions during the shift to online learning. The local codebase includes institution and classroom management, secure joins, exam creation, image-processing-based invigilation, marking workflows, and secure chat.",
-    tags: ["EdTech", "AI/ML", "Software"],
-    date: "2021-09",
-    stage: "Completed",
-    funding: "None",
-    stack: ["Next.js", "Tauri", "Prisma", "PostgreSQL", "Firebase", "TensorFlow.js"],
-    links: [
-      {
-        label: "TADHack South Africa winner article (2021)",
-        href: "https://blog.tadhack.com/2021/10/14/tadhack-south-africa-winner-maftuha/",
-        kind: "Proof",
-      },
-      {
-        label: "TADHack Global 2021 summary",
-        href: "https://blog.tadhack.com/2021/09/26/tadhack-global-2021-summary/",
-        kind: "Proof",
-      },
-    ],
-  },
-  {
-    slug: "gotcha-education",
-    title: "Gotcha (EdTech Proctoring)",
-    short: "Autonomous cheat detection for online and offline assessments.",
-    description:
-      "EdTech product focused on assessment integrity, practical teacher workflows, and real-world deployment constraints. The 2023 IEEE Entrepreneurship workshop article identifies Gotcha as a first-place venture concept focused on autonomous cheat detection in online and offline exams.",
-    tags: ["EdTech", "AI/ML", "Startup"],
-    date: "2023-07",
-    stage: "MVP",
-    funding: "Funded", // R100k startup funding (AGOF), kept as portfolio-supplied context.
-    stack: ["React Native", "Node.js", "Supabase"],
-    links: [
-      { label: "GotchaExam website", href: "https://www.gotchaexam.com/", kind: "Live" },
-      { label: "GotchaEducation company site", href: "https://www.gotchaeducation.com/", kind: "Live" },
-      {
-        label: "IEEE Entrepreneurship article (2023)",
-        href: "https://entrepreneurship.ieee.org/2023_07_21_ieee-entrepreneurship-hosts-successful-workshop-at-wits-university-south-africa/",
-        kind: "Proof",
-      },
-    ],
-    featured: true,
-  },
-  {
-    slug: "gotcha-class-management",
-    title: "Gotcha Class Management Platform",
-    short:
-      "Lightweight class and learner information system for small institutions.",
-    description:
-      "Product validation and MVP deployment for smaller institutions lacking enterprise education tooling. Focus on usability, low admin overhead, and reliable learner records.",
-    tags: ["EdTech", "Software", "Impact"],
-    date: "2024",
-    stage: "MVP",
-    funding: "Bootstrapped",
-    stack: ["React Native", "Supabase"],
-  },
-  {
-    slug: "hifz-mobile",
-    title: "Hifz Mobile - Class & Progress Management App",
-    short: "Mobile app for managing hifz classes, attendance, and progress.",
-    description:
-      "Shipped mobile application used for class management and progress tracking in hifz programmes, iterated through teacher feedback and continuous releases.",
-    tags: ["EdTech", "Mobile", "Software"],
-    date: "2025",
-    stage: "Scaling",
-    funding: "Bootstrapped",
-    stack: ["React Native (Expo)", "Supabase"],
-    featured: true,
-  },
-
-  // ===== Community / Civic Tech =====
-  {
-    slug: "school-community-service-platform",
-    title: "Community Service Tracking Platform for Schools",
-    short: "Platform to formalise and scale community service participation.",
-    description:
-      "Civic-tech project in problem discovery and stakeholder validation to improve how schools track, verify, and report student community service.",
-    tags: ["Community", "Software", "Impact"],
-    date: "2025",
-    stage: "Validation",
-    funding: "Bootstrapped",
-    stack: ["React Native", "Supabase"],
-  },
-
-  // ===== Sustainability / Humanitarian Design =====
-  {
-    slug: "ewb-sustainable-housing",
-    title: "Sustainable Housing Using Recycled Materials (EWB)",
-    short: "Affordable housing concept using recycled plastics and bottles.",
-    description:
-      "Completed humanitarian engineering design project focused on sustainable, low-cost housing for migrants using recycled plastics and bottles. Selected among the top projects from roughly 1,400 students.",
-    tags: ["Sustainability", "Engineering", "Design"],
-    date: "2023-07",
-    stage: "Completed",
-    funding: "None",
-    featured: true,
-  },
-
-  // ===== Robotics / Hardware =====
-  {
-    slug: "quadruped-walking-robot",
-    title: "3D-Printed Quadruped Walking Robot",
-    short: "Designed and programmed a quadruped robot capable of walking.",
-    description:
-      "Early robotics project exploring gait control, mechanical design, 3D printing, and embedded programming through hands-on prototyping.",
-    tags: ["Robotics", "3D Printing", "Embedded"],
-    date: "2018-05",
-    stage: "Completed",
-    funding: "None",
-  },
-  {
-    slug: "cave-traversal-robot",
-    title: "Cave-Traversal Robotics System (Grottobot)",
-    short: "Robotics system designed for cave-like terrain traversal.",
-    description:
-      "Built a robot designed to traverse uneven, cave-like terrain for exploration scenarios, integrating mechanical design, electronics, and control logic.",
-    tags: ["Robotics", "Engineering", "Hardware"],
-    date: "2019-08",
-    stage: "Completed",
-    funding: "None",
-  },
-  {
-    slug: "scietmeer-mobile-science-lab",
-    title: "Scietmeer - Mobile Science Laboratory Robot",
-    short: "Mobile robotics platform for science and field applications.",
-    description:
-      "Developed a mobile science laboratory robot for field applications including search and rescue, archaeology, architecture, and farming. The project later represented South Africa internationally at IFEST Tunisia in 2020.",
-    tags: ["Robotics", "Science", "Hardware"],
-    date: "2019-11",
-    stage: "Completed",
-    funding: "None",
-  },
-  {
-    slug: "agribot-agriculture-robotics",
-    title: "Agribot - Sustainable Agriculture Robotics Platform",
-    short: "Robotics platform focused on farming and sustainability.",
-    description:
-      "Built a sustainability-oriented agriculture robotics platform integrating mechanical systems, electronics, and embedded software. The 2021 Taiwan International Science Fair abstract lists Agribot as an engineering project by Talhah Patelia and Zayd Kara.",
-    tags: ["Robotics", "Agriculture", "Sustainability"],
-    date: "2020-08",
-    stage: "Completed",
-    funding: "None",
-    links: [
-      {
-        label: "Taiwan International Science Fair abstract (2021)",
-        href: "https://twsf.ntsec.gov.tw/activity/race-2/2021/pdf/100045.pdf",
-        kind: "Proof",
-      },
-    ],
-    featured: true,
-  },
-
-  // ===== Embedded ML / Infrastructure =====
-  {
-    slug: "pothole-detection-embedded-ml",
-    title: "Embedded Pothole Detection & Decay Prediction",
-    short: "Sensor-driven ML system for pothole detection and modelling.",
-    description:
-      "Proof-of-concept system combining embedded sensing and ML inference to detect potholes and model how road damage decays over time. Local project files include environmental sensing work with temperature and humidity data capture.",
-    tags: ["AI/ML", "Embedded", "Infrastructure"],
-    date: "2023-08",
-    stage: "Completed",
-    funding: "None",
-    stack: ["Embedded sensors", "ML inference", "Prototyping"],
-  },
-
-  // ===== AFRETEC / Transport / Fintech =====
-  {
-    slug: "afretec-wits-fintech-robot-delivery",
-    title: "Fintech Payments + Robotic Food Delivery (AFRETEC)",
-    short: "Integrated mobile payments with robotic campus food delivery.",
-    description:
-      "Integrated fintech payments with a robotic food delivery concept designed for campus operation between East and West Campus.",
-    tags: ["Robotics", "Fintech", "Systems"],
-    date: "2024",
-    stage: "Completed",
-    funding: "None",
-  },
-  {
-    slug: "afretec-nairobi-agricultural-storage",
-    title: "Decentralised Agricultural Storage & Logistics Platform",
-    short: "Platform addressing post-harvest losses and market access.",
-    description:
-      "Led development of a decentralised agricultural storage and logistics platform using modular infrastructure and a supporting digital system to reduce post-harvest losses. The University of Nairobi AFRETEC article documents the 2024 Makerthon, cross-university teams, and agriculture-focused innovation work.",
-    tags: ["Agriculture", "Sustainability", "Impact"],
-    date: "2024-10",
-    stage: "MVP",
-    funding: "None",
-    links: [
-      {
-        label: "AFRETEC UoN Makerthon article (2024)",
-        href: "https://afretec.uonbi.ac.ke/afretec-uon-student-makerthon-2024-a-showcase-of-innovation-and-collaboration/",
-        kind: "Proof",
-      },
-    ],
-  },
-  {
-    slug: "navigotransport-barbados",
-    title: "NavigoTransport x Barbados (Public Transport Prototype)",
-    short: "Prototype public transport system for a national authority.",
-    description:
-      "Early-stage consultancy and prototype demonstration for the Barbados Transport Board, visualising routes, schedules, and user flows.",
-    tags: ["Transport", "Software", "Consulting"],
-    date: "2024",
-    stage: "Validation",
-    funding: "None",
-    featured: true,
-  },
-
-  // ===== HPC / Supercomputing =====
-  {
-    slug: "asc-student-supercomputer-challenge",
-    title: "ASC Student Supercomputer Challenge (Global Finals)",
-    short: "Designed and optimised HPC systems under strict power limits.",
-    description:
-      "Built and tuned a multi-node HPC cluster, executed benchmarks and scientific/AI workloads, and presented results to an international panel. The Wits HPC ASC25 site records Wits as a Top 25 finalist for the 2025 final round at Qinghai University in Xining, China.",
-    tags: ["HPC", "Systems", "International"],
-    date: "2025-03",
-    stage: "Completed",
-    funding: "None",
-    stack: ["Linux", "Slurm", "MPI", "Benchmarking"],
-    links: [
-      { label: "Wits HPC ASC25 site", href: "https://asc.witshpc.com/", kind: "Proof" },
-      {
-        label: "ASC25 preliminary result",
-        href: "https://www.asc-events.net/StudentChallenge/ASC25/preliminary-result.php",
-        kind: "Proof",
-      },
-    ],
-  },
-
-  // ===== Electronics / Signal Processing =====
-  {
-    slug: "clap-based-electronic-lock",
-    title: "Clap-Based Detection Subsystem (Electronic Lock)",
-    short: "Signal-processing-based clap detection with timing logic.",
-    description:
-      "Designed and implemented a clap-based detection subsystem as part of a multi-stage electronic lock, focusing on detection accuracy and integration.",
-    tags: ["Electronics", "Signal Processing"],
-    date: "2024",
-    stage: "Completed",
-    funding: "None",
-  },
-  {
-    slug: "sound-controlled-robot-car",
-    title: "Sound-Controlled Robotic Car",
-    short: "Whistle-driven robot using Goertzel and DTMF encoding.",
-    description:
-      "Built a sound-controlled robotic car using custom 3D-printed whistles, MEMS microphone input, Goertzel detection with DTMF encoding, PWM motor control, and IMU-based PID correction.",
-    tags: ["Robotics", "Signal Processing", "Embedded"],
-    date: "2025",
-    stage: "Completed",
-    funding: "None",
-    stack: ["MEMS microphone", "Goertzel", "PID control", "PWM motor control"],
-  },
-
-  // ===== Current Work =====
+  // Current
   {
     slug: "gotchaeducation-platform",
-    title: "GotchaEducation - Offline-First Education Software",
-    short:
-      "Live education software and consulting across Hifz, exams, community service, LMS, tutoring, and school operations.",
-    description:
-      "Current company and product direction for offline-first education systems. GotchaEducation supports real learner workflows through reusable SaaS products and custom education software for institutions that need practical online and offline delivery.",
-    tags: ["EdTech", "Software", "Startup", "Impact"],
+    seoTitle: "GotchaEducation: offline school software",
+    title: "GotchaEducation",
+    summary:
+      "School software for Hifz classes, exams and community service, used by 182 students across 8 schools.",
+    tags: ["EdTech", "Software", "Startup"],
     date: "2026-07",
-    stage: "Scaling",
-    funding: "Bootstrapped",
+    status: "Live",
     role: "Founder",
-    impact: "100+ students supported across active education workflows and pilots.",
-    stack: ["React Native", "Next.js", "Firebase", "Supabase", "Offline-first architecture"],
+    stack: ["React Native", "Next.js", "Supabase", "Firebase"],
     links: [
+      { label: "gotchaeducation.com", href: "https://www.gotchaeducation.com/", kind: "Live" },
+      { label: "Hifz App", href: "https://hifz.gotchaeducation.com/", kind: "Live" },
+      { label: "GotchaExam", href: "https://www.gotchaexam.com/", kind: "Live" },
       {
-        label: "GotchaEducation company site",
-        href: "https://www.gotchaeducation.com/",
-        kind: "Live",
-      },
-      {
-        label: "Hifz App product site",
-        href: "https://hifz.gotchaeducation.com/",
-        kind: "Live",
-      },
-      {
-        label: "GotchaExam product site",
-        href: "https://www.gotchaexam.com/",
-        kind: "Live",
-      },
-      {
-        label: "Community Service App product page",
+        label: "Community Service App",
         href: "https://www.gotchaeducation.com/products/community-service-app",
         kind: "Live",
       },
     ],
+    related: [{ type: "award", slug: "allan-gray-gotchaexam-funding" }],
     featured: true,
   },
   {
     slug: "navigotransport-campus-transit",
-    title: "NavigoTransport - Offline-First Campus Transit",
-    short:
-      "Private-beta Wits shuttle app with on-device routing, offline timetables, reminders, safety, and lost-and-found flows.",
-    description:
-      "Current transport product focused on making campus shuttle movement predictable for Wits students. The app computes trips on-device, keeps routes and timetables available offline, and includes student-facing service alerts, reminders, campus security, and lost-and-found workflows.",
-    tags: ["Transport", "Mobile", "Software", "Infrastructure"],
+    image: images.navigoPlanner,
+    gallery: [images.navigoRoute, images.navigoReminder, images.navigoLostFound, images.navigoMap],
+    seoTitle: "NavigoTransport: Wits campus shuttle app",
+    title: "NavigoTransport",
+    summary:
+      "A Wits shuttle app that plans trips on the phone, so routes and timetables work without signal.",
+    tags: ["Transport", "Mobile", "Software"],
     date: "2026-06",
-    stage: "MVP",
-    funding: "Bootstrapped",
-    role: "Co-founder",
-    impact: "Live Android listing and iOS TestFlight beta for Wits campus transit.",
-    stack: ["React Native", "Expo", "On-device routing", "Offline maps", "Push notifications"],
+    status: "Live",
+    role: "Co-founder and director",
+    stack: ["React Native", "Expo", "On-device routing", "Offline maps"],
     links: [
+      { label: "navigotransport.com", href: "https://www.navigotransport.com/", kind: "Live" },
       {
-        label: "NavigoTransport website",
-        href: "https://www.navigotransport.com/",
-        kind: "Live",
-      },
-      {
-        label: "Google Play listing",
+        label: "Google Play",
         href: "https://play.google.com/store/apps/details?id=com.navigotransport.app&pcampaignid=web_share",
         kind: "Store",
       },
-      {
-        label: "iOS TestFlight beta",
-        href: "https://testflight.apple.com/join/vK7WpcnY",
-        kind: "Beta",
-      },
+      { label: "iOS TestFlight", href: "https://testflight.apple.com/join/vK7WpcnY", kind: "Beta" },
     ],
     featured: true,
+  },
+
+  // 2025
+  {
+    slug: "asc-student-supercomputer-challenge",
+    image: images.asc25Awards,
+    gallery: [images.chpcTeam],
+    seoTitle: "Wits HPC team: ASC25 finalist, CHPC 2nd",
+    title: "Wits HPC student cluster team",
+    summary:
+      "Builds and tunes a supercomputer under a power cap. 2025 ASC finalist, 2024 CHPC runner-up, ISC25 competitor.",
+    tags: ["HPC", "Systems", "International"],
+    date: "2025-05",
+    stack: ["Linux", "Slurm", "MPI", "Benchmarking"],
+    links: [
+      { label: "Wits HPC ASC25 site", href: "https://asc.witshpc.com/", kind: "Source" },
+      {
+        label: "ASC25 preliminary result",
+        href: "https://www.asc-events.net/StudentChallenge/ASC25/preliminary-result.php",
+        kind: "Source",
+      },
+    ],
+    related: [
+      { type: "award", slug: "asc-top-25-global-2025" },
+      { type: "award", slug: "chpc-student-cluster-competition-2024" },
+      { type: "award", slug: "deans-special-award-2025" },
+    ],
+    featured: true,
+  },
+  {
+    slug: "micromouse-robotics",
+    seoTitle: "Wits MicroMouse Robotics: first Wits team",
+    title: "Wits MicroMouse Robotics",
+    summary:
+      "The first MicroMouse team at Wits: small robots that solve a maze on their own. Lead engineer, then manager.",
+    tags: ["Robotics", "Embedded", "Engineering"],
+    date: "2025",
+    status: "Completed",
+    role: "Lead engineer, then manager",
+    stack: ["Custom PCBs", "EasyEDA", "JLCPCB", "Wi-Fi"],
+  },
+  {
+    slug: "sound-controlled-robot-car",
+    title: "Sound-controlled robot car",
+    summary:
+      "A car driven by whistles. Goertzel detection of DTMF tones, PWM motor control and gyro-based PID correction.",
+    tags: ["Robotics", "Signal Processing", "Embedded"],
+    date: "2025",
+    status: "Completed",
+    stack: ["MEMS microphone", "Goertzel", "PID", "PWM"],
+  },
+  {
+    slug: "infusion-pump-platform",
+    seoTitle: "Low-cost infusion pump design",
+    title: "Low-cost infusion pump",
+    summary:
+      "A peristaltic infusion pump with quick-change tubing and variable flow, designed to be made locally.",
+    tags: ["Medical", "Embedded", "CAD"],
+    date: "2025",
+    status: "In progress",
+    stack: ["ESP32", "Motor drivers", "CAD"],
+  },
+
+  // 2024
+  {
+    slug: "afretec-nairobi-agricultural-storage",
+    image: images.nairobiTeam,
+    gallery: [images.nairobiDemo],
+    seoTitle: "Decentralised farm storage: AFRETEC winner",
+    title: "Decentralised farm storage platform",
+    summary:
+      "Modular storage and a digital logistics system to cut post-harvest losses for small farmers. First place in Nairobi.",
+    tags: ["Agriculture", "Sustainability", "Impact"],
+    date: "2024-10",
+    status: "Completed",
+    role: "Led development",
+    related: [{ type: "award", slug: "afretec-nairobi-first-place-2024" }],
+  },
+  {
+    slug: "afretec-wits-fintech-robot-delivery",
+    title: "Payments and robot food delivery",
+    summary:
+      "Mobile payments linked to a robot that delivers food between Wits East and West Campus.",
+    tags: ["Robotics", "Fintech", "Systems"],
+    date: "2024",
+    status: "Completed",
+  },
+  {
+    slug: "navigotransport-barbados",
+    title: "Public transport prototype for Barbados",
+    summary:
+      "A prototype shown to the Barbados Transport Board, visualising routes, schedules and passenger flows.",
+    tags: ["Transport", "Software", "Consulting"],
+    date: "2024",
+    status: "Completed",
+  },
+  {
+    slug: "clap-based-electronic-lock",
+    title: "Clap-detecting electronic lock",
+    summary: "The clap-detection stage of a multi-stage electronic lock, built around signal processing and timing.",
+    tags: ["Electronics", "Signal Processing"],
+    date: "2024",
+    status: "Completed",
+  },
+
+  // 2023
+  {
+    slug: "gotcha-education",
+    seoTitle: "GotchaExam: exam cheating detection",
+    title: "GotchaExam",
+    summary:
+      "Exam proctoring that detects cheating in online and offline exams. The first product of GotchaEducation.",
+    tags: ["EdTech", "AI/ML", "Startup"],
+    date: "2023-07",
+    status: "Live",
+    role: "Founder",
+    stack: ["React Native", "Node.js", "Supabase"],
+    links: [
+      { label: "gotchaexam.com", href: "https://www.gotchaexam.com/", kind: "Live" },
+      {
+        label: "IEEE Entrepreneurship report",
+        href: "https://entrepreneurship.ieee.org/2023_07_21_ieee-entrepreneurship-hosts-successful-workshop-at-wits-university-south-africa/",
+        kind: "Press",
+      },
+    ],
+    related: [
+      { type: "award", slug: "ieee-entrepreneurship-prospectors-2023" },
+      { type: "award", slug: "allan-gray-gotchaexam-funding" },
+    ],
+  },
+  {
+    slug: "pothole-detection-embedded-ml",
+    title: "Pothole detection and decay prediction",
+    summary:
+      "A sensor and machine learning system that finds potholes and models how road damage grows. Won Best Coder at the Adapt IT hackathon.",
+    tags: ["AI/ML", "Embedded", "Infrastructure"],
+    date: "2023-08",
+    status: "Completed",
+    related: [{ type: "award", slug: "best-coder-adaptit-2023" }],
+  },
+  {
+    slug: "ewb-sustainable-housing",
+    seoTitle: "Housing from recycled plastic bottles",
+    image: images.ewbStructure,
+    gallery: [images.ewbModel, images.ewbConnector],
+    title: "Housing from recycled plastic",
+    summary:
+      "A low-cost housing design for migrants using recycled plastics and bottles. Top 10 of about 1,400 student projects.",
+    tags: ["Sustainability", "Engineering", "Design"],
+    date: "2023-07",
+    status: "Completed",
+    related: [{ type: "award", slug: "ewb-top-10-project-2023" }],
+  },
+
+  // 2021
+  {
+    slug: "maftuha-edtech-platform",
+    image: images.maftuhaExam,
+    seoTitle: "Maftuha: TADHack South Africa winner 2021",
+    title: "Maftuha",
+    summary:
+      "One application for running a school online: classes, exams, invigilation by image processing, marking and chat. Built at 16.",
+    tags: ["EdTech", "AI/ML", "Software"],
+    date: "2021-09",
+    status: "Completed",
+    role: "Co-builder, with Adela Bootha",
+    stack: ["Next.js", "Tauri", "Prisma", "PostgreSQL", "Firebase", "TensorFlow.js"],
+    links: [
+      {
+        label: "TADHack South Africa winner article",
+        href: "https://blog.tadhack.com/2021/10/14/tadhack-south-africa-winner-maftuha/",
+        kind: "Press",
+      },
+    ],
+    related: [{ type: "award", slug: "tadhack-winner-2021" }],
+  },
+  {
+    slug: "agribot-agriculture-robotics",
+    seoTitle: "Agribot: Eskom Expo gold, Taiwan silver",
+    title: "Agribot",
+    summary:
+      "A mobile agriculture robot. Gold at Eskom Expo 2020, then silver at the Taiwan International Science Fair.",
+    tags: ["Robotics", "Agriculture", "Sustainability"],
+    date: "2020-08",
+    status: "Completed",
+    image: {
+      src: "/images/awards/taiwan-science-fair-2021.jpg",
+      alt: "Eskom Expo announcement card showing Talhah Patelia, who was representing South Africa at the 2021 Taiwan International Science Fair",
+      width: 830,
+      height: 501,
+      caption: "Announcement card from Eskom Expo.",
+    },
+    links: [
+      {
+        label: "Fair abstract",
+        href: "https://twsf.ntsec.gov.tw/activity/race-2/2021/pdf/100045.pdf",
+        kind: "Source",
+      },
+    ],
+    related: [
+      { type: "award", slug: "eskom-expo-gold-2020" },
+      { type: "award", slug: "taiwan-science-fair-silver-2021" },
+    ],
+  },
+
+  // 2019 and earlier
+  {
+    slug: "scietmeer-mobile-science-lab",
+    seoTitle: "Scietmeer: science lab rover, IFEST silver",
+    title: "Scietmeer",
+    summary:
+      "A six-wheeled mobile science laboratory for search and rescue, archaeology, architecture and farming. Silver at IFEST Tunisia.",
+    tags: ["Robotics", "Science", "Hardware"],
+    date: "2019-11",
+    status: "Completed",
+    image: {
+      src: "/images/projects/scietmeer-cad.jpg",
+      alt: "CAD render of Scietmeer, a six-wheeled rover with a robotic arm",
+      width: 1200,
+      height: 690,
+      caption: "CAD render.",
+      kind: "screen",
+    },
+    related: [
+      { type: "award", slug: "sayess-gold-2019" },
+      { type: "award", slug: "ifest-tunisia-silver-2020" },
+    ],
+  },
+  {
+    slug: "cave-traversal-robot",
+    title: "GrottoBot cave robot",
+    summary:
+      "A robot built to travel over uneven, cave-like ground. Gold and two special prizes at the North Gauteng Science Fair.",
+    tags: ["Robotics", "Engineering", "Hardware"],
+    date: "2019-08",
+    status: "Completed",
+    related: [{ type: "award", slug: "north-gauteng-science-fair-2019" }],
+  },
+  {
+    slug: "quadruped-walking-robot",
+    title: "Quadruped walking robot",
+    summary: "A 3D-printed four-legged robot, programmed to walk. Built at 13 and placed first at the VUT and AMS Science Fair.",
+    tags: ["Robotics", "3D Printing", "Embedded"],
+    date: "2018-05",
+    status: "Completed",
+    image: {
+      src: "/images/projects/quadruped-2018.jpg",
+      alt: "A small yellow quadruped robot walking on a tiled floor",
+      width: 880,
+      height: 810,
+      caption: "The prototype, May 2018.",
+    },
+    related: [{ type: "award", slug: "vut-ams-science-fair-2018-first-place" }],
   },
 ];

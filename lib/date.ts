@@ -1,41 +1,24 @@
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 export function getYear(date?: string) {
   if (!date) return null;
   return date.match(/\d{4}/)?.[0] ?? null;
 }
 
-const MONTHS = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-
+/** "2024-07" -> "Jul 2024", "2024" -> "2024", "2024-07-26" -> "26 Jul 2024". */
 export function formatDate(date?: string) {
   if (!date) return null;
 
-  const dayMatch = date.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  if (dayMatch) {
-    const [, year, month, day] = dayMatch;
-    return `${Number(day)} ${MONTHS[Number(month) - 1]} ${year}`;
-  }
+  const day = date.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (day) return `${Number(day[3])} ${MONTHS[Number(day[2]) - 1]} ${day[1]}`;
 
-  const monthMatch = date.match(/^(\d{4})-(\d{2})$/);
-  if (monthMatch) {
-    const [, year, month] = monthMatch;
-    return `${MONTHS[Number(month) - 1]} ${year}`;
-  }
+  const month = date.match(/^(\d{4})-(\d{2})$/);
+  if (month) return `${MONTHS[Number(month[2]) - 1]} ${month[1]}`;
 
   return getYear(date);
 }
 
+/** Full ISO date for sitemaps, structured data and Open Graph. */
 export function toIsoDate(date?: string) {
   if (!date) return undefined;
   if (/^\d{4}$/.test(date)) return `${date}-01-01`;

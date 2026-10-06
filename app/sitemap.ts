@@ -1,40 +1,32 @@
 import type { MetadataRoute } from "next";
-import { awards } from "@/data/awards";
-import { blogPosts } from "@/data/blog";
-import { projects } from "@/data/projects";
 import { siteConfig } from "@/data/profile";
+import { blogPosts } from "@/data/blog";
+import { getPagedEntries } from "@/lib/catalog";
 import { sortDateValue, toIsoDate } from "@/lib/date";
 
-type DatedItem = { date?: string; updated?: string };
-
-function entry(path: string, date?: string): MetadataRoute.Sitemap[number] {
-  return {
-    url: `${siteConfig.url}${path}`,
-    lastModified: toIsoDate(date),
-  };
-}
-
-function latestDate(items: DatedItem[]) {
-  return items
-    .map((item) => item.updated ?? item.date)
-    .filter(Boolean)
-    .sort((a, b) => sortDateValue(b) - sortDateValue(a))[0];
-}
-
+/**
+ * Only pages that exist and say something are listed. `lastModified` comes from
+ * `siteConfig.updated` and from blog post dates; detail pages carry none, because
+ * a made-up date is worse than leaving it out.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const latestProjectDate = latestDate(projects);
-  const latestAwardDate = latestDate(awards);
-  const latestBlogDate = latestDate(blogPosts);
-  const latestSiteDate = latestDate([...projects, ...awards, ...blogPosts]);
+  const entries = getPagedEntries();
+  const latestPost = [...blogPosts]
+    .map((post) => post.updated ?? post.date)
+    .sort((a, b) => sortDateValue(b) - sortDateValue(a))[0];
 
   return [
-    entry("/", latestSiteDate),
-    entry("/projects", latestProjectDate),
-    entry("/awards", latestAwardDate),
-    entry("/blog", latestBlogDate),
-    entry("/contact", latestSiteDate),
-    ...projects.map((project) => entry(`/projects/${project.slug}`, project.date)),
-    ...awards.map((award) => entry(`/awards/${award.slug}`, award.date)),
-    ...blogPosts.map((post) => entry(`/blog/${post.slug}`, post.updated ?? post.date)),
+    { url: `${siteConfig.url}/`, lastModified: siteConfig.updated },
+    { url: `${siteConfig.url}/projects`, lastModified: siteConfig.updated },
+    { url: `${siteConfig.url}/awards`, lastModified: siteConfig.updated },
+    { url: `${siteConfig.url}/gallery`, lastModified: siteConfig.updated },
+    { url: `${siteConfig.url}/blog`, lastModified: toIsoDate(latestPost) },
+    { url: `${siteConfig.url}/contact`, lastModified: siteConfig.updated },
+    ...entries.map((entry) => ({
+      url: `${siteConfig.url}${entry.href}`,
+      ...(entry.type === "blog"
+        ? { lastModified: toIsoDate(blogPosts.find((post) => post.slug === entry.slug)?.updated ?? entry.date) }
+        : {}),
+    })),
   ];
 }

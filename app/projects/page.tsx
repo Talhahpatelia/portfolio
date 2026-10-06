@@ -1,150 +1,54 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { projects } from "@/data/projects";
-import Icon, { type IconName } from "@/components/Icon";
-import TileCard from "@/components/TileCard";
-import { categoriesFromParam, matchesCategoryFilter, primaryCategory } from "@/lib/categories";
-import { byNewest, countPublicSignals } from "@/lib/portfolio";
-import { siteConfig } from "@/data/profile";
-import { absoluteUrl, defaultOgImage } from "@/lib/seo";
+import ArchiveList from "@/components/ArchiveList";
+import { getProjects } from "@/lib/catalog";
+import { absoluteUrl, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-type ArchiveSearchParams = { category?: string | string[] };
+export const metadata = pageMetadata({
+  title: "Projects: school software, robotics, HPC",
+  description:
+    "Software, robotics and hardware built by Talhah Patelia since 2018: school software, a campus shuttle app, a student supercomputer, robots and embedded systems.",
+  path: "/projects",
+});
 
-export function generateMetadata({
-  searchParams = {},
-}: {
-  searchParams?: ArchiveSearchParams;
-}): Metadata {
-  const selectedCategories = categoriesFromParam(searchParams.category);
-  const filtered = selectedCategories.length > 0;
-  const title = filtered ? `Projects: ${selectedCategories.join(", ")}` : "Projects";
-  const description = filtered
-    ? `Filtered project archive for Talhah Patelia covering ${selectedCategories.join(", ")} with stages, dates, stack details, and proof links.`
-    : "Project archive for Talhah Patelia with current work, dates, stages, technology stacks, and public proof links.";
-
-  return {
-    title,
-    description,
-    alternates: { canonical: "/projects" },
-    robots: filtered ? { index: false, follow: true } : undefined,
-    openGraph: {
-      title,
-      description,
-      url: `${siteConfig.url}/projects`,
-      type: "website",
-      images: [defaultOgImage],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [defaultOgImage.url],
-    },
-  };
-}
-
-export default function ProjectsPage({
-  searchParams = {},
-}: {
-  searchParams?: ArchiveSearchParams;
-}) {
-  const selectedCategories = categoriesFromParam(searchParams.category);
-  const visibleProjects = byNewest(projects).filter((project) =>
-    matchesCategoryFilter(project, selectedCategories),
-  );
-  const publicSignals = visibleProjects.reduce((total, project) => total + countPublicSignals(project), 0);
-  const activeProjects = visibleProjects.filter((project) =>
-    ["Validation", "MVP", "Scaling"].includes(project.stage),
-  );
-  const metrics: { label: string; value: number; icon: IconName }[] = [
-    { label: selectedCategories.length ? "Showing" : "Projects", value: visibleProjects.length, icon: "folder" },
-    { label: "Active", value: activeProjects.length, icon: "briefcase" },
-    { label: "Signals", value: publicSignals, icon: "shield" },
-  ];
-  const itemListJsonLd = {
+export default function ProjectsPage() {
+  const entries = getProjects();
+  const collection = {
     "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Talhah Patelia project archive",
-    itemListElement: visibleProjects.map((project, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      url: absoluteUrl(`/projects/${project.slug}`),
-      name: project.title,
-    })),
+    "@type": "CollectionPage",
+    name: "Projects by Talhah Patelia",
+    url: absoluteUrl("/projects"),
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: entries
+        .filter((entry) => entry.hasPage)
+        .map((entry, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          url: absoluteUrl(entry.href),
+          name: entry.title,
+        })),
+    },
   };
 
   return (
-    <main className="space-y-8">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
-      />
-
-      <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
-        <div>
-          <div className="text-sm font-semibold uppercase tracking-wide text-[var(--accent)]">
-            Project Archive
-          </div>
-          <h1 className="mt-1 text-3xl font-semibold text-[var(--text-primary)]">
-            Projects with stage, stack, date, and proof
-          </h1>
-          <p className="mt-3 max-w-3xl leading-7 text-[var(--text-muted)]">
-            Current builds are mixed with older engineering, robotics, software,
-            HPC, and entrepreneurship work. Each card shows the fastest path to
-            context and public evidence.
-          </p>
-        </div>
-        <div className="grid grid-cols-3 gap-3">
-          {metrics.map((metric) => (
-            <div key={metric.label} className="rounded-lg border border-[var(--border-soft)] bg-[var(--bg-surface)] p-3 shadow-[var(--shadow-soft)]">
-              <Icon name={metric.icon} className="h-4 w-4 text-[var(--accent)]" />
-              <div className="mt-2 font-mono text-2xl font-semibold text-[var(--text-primary)]">{metric.value}</div>
-              <div className="text-xs text-[var(--text-muted)]">{metric.label}</div>
-            </div>
-          ))}
-        </div>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            collection,
+            breadcrumbJsonLd([
+              { name: "Home", href: "/" },
+              { name: "Projects", href: "/projects" },
+            ]),
+          ]),
+        }} />
+      <header className="pb-10 pt-10 md:pt-16">
+        <h1 className="text-[clamp(2.25rem,5.5vw,3.5rem)]">Projects</h1>
+        <p className="lead mt-5">
+          What I&rsquo;ve built, newest first. Where there is more to say, the title links to a write-up.
+        </p>
+      </header>
+      <section className="border-t border-rule pt-8">
+        <ArchiveList entries={entries} noun="projects" />
       </section>
-
-      {selectedCategories.length > 0 && (
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[var(--border-soft)] bg-[var(--bg-surface)] p-4 text-sm shadow-[var(--shadow-soft)]">
-          <div className="text-[var(--text-muted)]">
-            Filtering projects by{" "}
-            <span className="font-medium text-[var(--text-primary)]">
-              {selectedCategories.join(", ")}
-            </span>
-            .
-          </div>
-          <Link href="/projects" className="font-medium text-[var(--text-primary)] underline underline-offset-4">
-            Clear filters
-          </Link>
-        </div>
-      )}
-
-      <div className="grid gap-4 md:grid-cols-2">
-        {visibleProjects.map((project) => (
-          <TileCard
-            key={project.slug}
-            title={project.title}
-            short={project.short}
-            description={project.description}
-            href={`/projects/${project.slug}`}
-            tags={project.tags}
-            date={project.date}
-            category={primaryCategory(project.tags)}
-            size="long"
-            image={project.image}
-            stage={project.stage}
-            role={project.role}
-            proofCount={countPublicSignals(project)}
-          />
-        ))}
-      </div>
-
-      {visibleProjects.length === 0 && (
-        <div className="rounded-lg border border-[var(--border-soft)] bg-[var(--bg-surface)] p-5 text-sm text-[var(--text-muted)] shadow-[var(--shadow-soft)]">
-          No projects match the selected filters.
-        </div>
-      )}
-    </main>
+    </>
   );
 }

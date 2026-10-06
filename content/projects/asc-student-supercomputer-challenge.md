@@ -1,14 +1,15 @@
-# ASC Student Supercomputer Challenge (Global Finals)
+# Wits HPC student cluster team
 
-Wits qualified as a Top 25 finalist for the 2025 ASC Student Supercomputer Challenge final round in Xining, China.
+For each student cluster competition the Wits HPC team builds a small supercomputer, tunes it to run benchmarks and scientific applications as fast as it can within a power limit, and presents the results to judges. I have been on the team for the 2024 and 2025 competitions.
 
-## Work Involved
-- Built and tuned Linux-based HPC systems under competition constraints.
-- Ran benchmarking and scientific workloads using Slurm, MPI, and performance-tuning workflows.
-- Prepared technical results and presented them in an international student supercomputing context.
+## Competitions
 
-## 2025 Context
-The Wits HPC ASC25 site records Wits as a Top 25 finalist for the ASC25 final round at Qinghai University. Local Wits HPC materials list Talhah Patelia as part of the 2025 Wits team.
+- **ASC Student Supercomputer Challenge, 2025.** More than 300 teams entered the preliminary round and 25 reached the final at Qinghai University in Xining, China, in May 2025. In the final, teams build a cluster under a 4,000 W power cap and run HPL, HPCG, AlphaFold3 and DeepSeek. The Wits HPC site says Wits was the first standalone African university to compete in the final.
+- **ISC25 Student Cluster Competition, June 2025.** My team competed online.
+- **CHPC National Student Cluster Competition, December 2024.** Second overall of ten teams, with the MATLAB Coding Challenge and the highest LINPACK result.
 
-- [Wits HPC ASC25 site](https://asc.witshpc.com/)
-- [ASC25 preliminary result](https://www.asc-events.net/StudentChallenge/ASC25/preliminary-result.php)
+## The work
+
+Administering a Linux cluster, scheduling jobs with Slurm, running MPI workloads, benchmarking and tuning performance.
+
+The faculty recognised the team's results with the [Special Dean's Award](/awards/deans-special-award-2025).

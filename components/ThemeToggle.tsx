@@ -1,19 +1,29 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
+/** A two-position slide switch: knob left is light, knob right is dark. */
 export default function ThemeToggle() {
-    const { theme, toggle } = useTheme();
+  const { theme, toggle } = useTheme();
+  const dark = theme === "dark";
 
-    return (
-        <button
-            onClick={toggle}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--border-soft)] bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-[var(--shadow-soft)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-muted)] hover:text-[var(--accent)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
-            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
-            title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
-        >
-            {theme === "dark" ? <Moon aria-hidden="true" className="h-4 w-4" /> : <Sun aria-hidden="true" className="h-4 w-4" />}
-        </button>
-    );
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={dark}
+      aria-label="Dark theme"
+      title={dark ? "Switch to light theme" : "Switch to dark theme"}
+      onClick={toggle}
+      className="relative h-6 w-11 shrink-0 rounded-[2px] border border-rule bg-panel"
+    >
+      <span
+        aria-hidden="true"
+        className={[
+          "absolute top-[3px] h-[16px] w-[16px] rounded-[1px] bg-ink transition-[left] duration-150",
+          dark ? "left-[23px]" : "left-[3px]",
+        ].join(" ")}
+      />
+    </button>
+  );
 }

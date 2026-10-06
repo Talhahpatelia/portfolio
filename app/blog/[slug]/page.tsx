@@ -1,157 +1,82 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
+import Breadcrumb from "@/components/Breadcrumb";
+import CopyLinkButton from "@/components/CopyLinkButton";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 import { blogPosts } from "@/data/blog";
 import { siteConfig } from "@/data/profile";
-import CopyLinkButton from "@/components/CopyLinkButton";
-import EvidencePanel from "@/components/EvidencePanel";
-import Icon, { type IconName } from "@/components/Icon";
-import MarkdownRenderer from "@/components/MarkdownRenderer";
 import { getMarkdown, stripMarkdownTitle } from "@/lib/content";
-import { formatDate } from "@/lib/date";
-import { absoluteUrl, breadcrumbJsonLd, imageForMetadata, pageId } from "@/lib/seo";
+import { formatDate, toIsoDate } from "@/lib/date";
+import { absoluteUrl, breadcrumbJsonLd, pageMetadata, personId } from "@/lib/seo";
 
 type Params = { slug: string };
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
+export function generateMetadata({ params }: { params: Params }) {
   const post = blogPosts.find((item) => item.slug === params.slug);
-  if (!post) return { title: "Blog" };
-  const url = `${siteConfig.url}/blog/${post.slug}`;
-  const description = post.description ?? post.short;
-  const image = imageForMetadata(post.image);
-
-  return {
+  if (!post) return {};
+  return pageMetadata({
     title: post.title,
-    description,
-    alternates: { canonical: url },
-    keywords: post.tags,
-    openGraph: {
-      title: post.title,
-      description,
-      url,
-      type: "article",
-      publishedTime: post.date,
-      modifiedTime: post.updated ?? post.date,
-      tags: post.tags,
-      images: [image],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description,
-      images: [image.url],
-    },
-  };
+    description: post.summary,
+    path: `/blog/${post.slug}`,
+    type: "article",
+    publishedTime: post.date,
+    modifiedTime: post.updated,
+  });
 }
 
-export default function BlogDetail({ params }: { params: Params }) {
+export default function BlogPostPage({ params }: { params: Params }) {
   const post = blogPosts.find((item) => item.slug === params.slug);
-  if (!post) return notFound();
-
   const md = getMarkdown("blog", params.slug);
-  if (!md) return notFound();
-  const body = stripMarkdownTitle(md);
+  if (!post || !md) return notFound();
+
   const path = `/blog/${post.slug}`;
-  const image = imageForMetadata(post.image);
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "@id": pageId(path),
-    headline: post.title,
-    description: post.description ?? post.short,
-    image: image.url,
-    datePublished: post.date,
-    dateModified: post.updated ?? post.date,
-    url: absoluteUrl(path),
-    keywords: post.tags,
-    inLanguage: "en-ZA",
-    mainEntityOfPage: {
-      "@id": pageId(path),
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "@id": `${absoluteUrl(path)}#post`,
+      headline: post.title,
+      description: post.summary,
+      url: absoluteUrl(path),
+      mainEntityOfPage: absoluteUrl(path),
+      image: absoluteUrl("/og.png"),
+      datePublished: toIsoDate(post.date),
+      dateModified: toIsoDate(post.updated ?? post.date),
+      inLanguage: "en-ZA",
+      author: { "@type": "Person", "@id": personId, name: siteConfig.name, url: siteConfig.url },
+      publisher: { "@id": personId },
+      isPartOf: { "@type": "Blog", "@id": absoluteUrl("/blog#blog") },
     },
-    author: {
-      "@type": "Person",
-      "@id": `${siteConfig.url}#person`,
-      name: siteConfig.name,
-      url: siteConfig.url,
-    },
-    publisher: {
-      "@type": "Person",
-      "@id": `${siteConfig.url}#person`,
-      name: siteConfig.name,
-    },
-    isPartOf: {
-      "@type": "Blog",
-      "@id": `${siteConfig.url}/blog#blog`,
-      name: `${siteConfig.name} Blog`,
-    },
-  };
-  const structuredData = [
-    jsonLd,
     breadcrumbJsonLd([
       { name: "Home", href: "/" },
-      { name: "Blog", href: "/blog" },
+      { name: "Writing", href: "/blog" },
       { name: post.title, href: path },
     ]),
   ];
-  const meta: { label: string; value: string; icon: IconName }[] = [
-    { label: "Published", value: formatDate(post.date), icon: "calendar" },
-    { label: "Reading Time", value: post.readingTime, icon: "clock" },
-  ];
 
   return (
-    <main className="space-y-8">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <article className="pb-8 pt-10 md:pt-14">
+        <Breadcrumb items={[{ name: "Home", href: "/" }, { name: "Writing", href: "/blog" }, { name: post.title }]} />
+        <h1 className="mt-8 max-w-4xl text-[clamp(2rem,5vw,3.25rem)]">{post.title}</h1>
+        <p className="label mt-5 flex flex-wrap gap-x-5">
+          <span>{formatDate(post.date)}</span>
+          <span>{post.readingTime}</span>
+        </p>
 
-      <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text-muted)] hover:text-[var(--text-primary)]">
-        <Icon name="arrow-left" className="h-4 w-4" />
-        Blog
-      </Link>
-
-      <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
-        <div className="space-y-4">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <div className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[var(--accent)]">
-                <Icon name="book-open" className="h-4 w-4" />
-                Blog
-              </div>
-              <h1 className="mt-1 text-3xl font-semibold text-[var(--text-primary)]">
-                {post.title}
-              </h1>
-            </div>
-            <div className="shrink-0">
-              <CopyLinkButton url={`/blog/${post.slug}`} />
-            </div>
-          </div>
-          <p className="max-w-3xl text-lg leading-8 text-[var(--text-muted)]">
-            {post.description ?? post.short}
+        <div className="mt-10 border-t border-rule pt-10">
+          <MarkdownRenderer md={stripMarkdownTitle(md)} />
+          <p className="mt-10">
+            <CopyLinkButton url={absoluteUrl(path)} />
           </p>
-          <dl className="grid gap-3 sm:grid-cols-2">
-            {meta.map((item) => (
-              <div key={item.label} className="rounded-lg border border-[var(--border-soft)] bg-[var(--bg-surface)] p-4 shadow-[var(--shadow-soft)]">
-                <dt className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
-                  <Icon name={item.icon} className="h-4 w-4" />
-                  {item.label}
-                </dt>
-                <dd className="mt-2 text-base font-semibold text-[var(--text-primary)]">{item.value}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
-
-        <EvidencePanel links={post.links} hasNarrative title="Referenced work" />
-      </section>
-
-      <article className="rounded-lg border border-[var(--border-soft)] bg-[var(--bg-surface)] p-5 shadow-[var(--shadow-soft)]">
-        <MarkdownRenderer md={body} />
       </article>
-    </main>
+    </>
   );
 }

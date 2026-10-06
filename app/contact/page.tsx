@@ -1,98 +1,71 @@
-import type { Metadata } from "next";
-import Icon, { type IconName } from "@/components/Icon";
+import Section from "@/components/Section";
+import SpecList from "@/components/SpecList";
 import { contact } from "@/data/contact";
-import { currentWork, siteConfig } from "@/data/profile";
+import { currentWork } from "@/data/profile";
+import CopyEmail from "@/components/CopyEmail";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contact",
-  description:
-    "Contact details and current work links for Talhah Patelia, GotchaEducation, and NavigoTransport.",
-  alternates: { canonical: "/contact" },
-};
+  description: "How to reach Talhah Patelia: email, LinkedIn and GitHub. Based in Johannesburg, South Africa.",
+  path: "/contact",
+});
 
-function iconFor(label: string): IconName {
-  if (label.toLowerCase().includes("cell")) return "phone";
-  return "mail";
-}
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "Contact Talhah Patelia",
+    url: "https://www.talhahpatelia.com/contact",
+  },
+  breadcrumbJsonLd([
+    { name: "Home", href: "/" },
+    { name: "Contact", href: "/contact" },
+  ]),
+];
 
 export default function ContactPage() {
   return (
-    <main className="space-y-8">
-      <section>
-        <div className="text-sm font-semibold uppercase tracking-wide text-[var(--accent)]">
-          Contact
-        </div>
-        <h1 className="mt-1 text-3xl font-semibold text-[var(--text-primary)]">
-          Reach the right inbox quickly
-        </h1>
-        <p className="mt-3 max-w-3xl leading-7 text-[var(--text-muted)]">
-          Use the business email for venture, consulting, proof, or portfolio
-          enquiries. Current product sites are linked below for direct context.
-        </p>
-        <div className="mt-4 inline-flex items-center gap-2 text-sm text-[var(--text-muted)]">
-          <Icon name="map" className="h-4 w-4" />
-          {siteConfig.location}
-        </div>
-      </section>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <header className="pb-10 pt-10 md:pt-16">
+        <h1 className="text-[clamp(2.25rem,5.5vw,3.5rem)]">Contact</h1>
+        <p className="lead mt-5">Email is the best way to reach me. I&rsquo;m in Johannesburg, South Africa.</p>
+      </header>
 
-      <section className="grid gap-4 sm:grid-cols-2">
-        {contact.map((item) => {
-          const icon = iconFor(item.label);
-          return (
-            <a
-              key={item.label}
-              href={item.href}
-              className="rounded-lg border border-[var(--border-soft)] bg-[var(--bg-surface)] p-5 text-[var(--text-primary)] shadow-[var(--shadow-soft)] transition hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-muted)]"
-            >
-              <div className="flex items-start gap-3">
-                <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-[var(--border-soft)] bg-[var(--bg-surface-muted)] text-[var(--accent)]">
-                  <Icon name={icon} className="h-4 w-4" />
-                </span>
-                <span>
-                  <span className="block text-sm text-[var(--text-muted)]">{item.label}</span>
-                  <span className="mt-1 block text-base font-semibold">{item.value}</span>
-                  {item.description && (
-                    <span className="mt-1 block text-xs text-[var(--text-muted)]">
-                      {item.description}
-                    </span>
-                  )}
-                </span>
-              </div>
-            </a>
-          );
-        })}
-      </section>
+      <Section label="Reach me">
+        <SpecList
+          className="border-b border-rule"
+          items={contact.map((item) => ({
+            label: item.label,
+            value:
+              item.label === "Email" ? (
+                <CopyEmail email={item.value} />
+              ) : (
+                <a
+                  className="link"
+                  href={item.href}
+                  {...(item.href.startsWith("http") ? { target: "_blank", rel: "me noopener" } : {})}
+                >
+                  {item.value}
+                </a>
+              ),
+          }))}
+        />
+      </Section>
 
-      <section className="space-y-4">
-        <div>
-          <div className="text-sm font-semibold uppercase tracking-wide text-[var(--accent)]">
-            Current Work
-          </div>
-          <h2 className="mt-1 text-2xl font-bold text-[var(--text-primary)]">
-            Product context before you email
-          </h2>
-        </div>
-        <div className="grid gap-4 lg:grid-cols-2">
+      <Section label="Companies">
+        <ul className="border-b border-rule">
           {currentWork.map((work) => (
-            <a
-              key={work.name}
-              href={work.href}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-lg border border-[var(--border-soft)] bg-[var(--bg-surface)] p-5 shadow-[var(--shadow-soft)] transition hover:border-[var(--border-strong)] hover:bg-[var(--bg-surface-muted)]"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <div className="text-sm font-semibold text-[var(--accent)]">{work.label}</div>
-                  <h3 className="mt-1 text-xl font-bold text-[var(--text-primary)]">{work.name}</h3>
-                </div>
-                <Icon name="external" className="h-4 w-4 text-[var(--text-muted)]" />
-              </div>
-              <p className="mt-3 leading-7 text-[var(--text-muted)]">{work.description}</p>
-            </a>
+            <li key={work.slug} className="border-t border-rule py-4 first:border-t-0 first:pt-0">
+              <a className="link text-lg" href={work.links[0].href} target="_blank" rel="noopener noreferrer">
+                {work.name}
+              </a>
+              <p className="prose-col mt-1">{work.summary}</p>
+            </li>
           ))}
-        </div>
-      </section>
-    </main>
+        </ul>
+      </Section>
+    </>
   );
 }

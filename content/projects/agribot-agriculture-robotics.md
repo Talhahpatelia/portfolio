@@ -1,13 +1,8 @@
-# Agribot - Sustainable Agriculture Robotics Platform
+# Agribot
 
-Agribot is a sustainability-focused agriculture robotics project integrating mechanical systems, electronics, and embedded software.
+Agribot is a mobile robot for farming and sustainability. I designed and 3D printed it, wrote its code and fitted the electronics. The Taiwan International Science Fair abstract lists Zayd Kara as a co-author.
 
-## Project Focus
-- A mobile robotics platform for agricultural and field contexts.
-- Sustainable farming and farmer-support use cases.
-- Mechanical, electronics, and embedded systems integration.
+## Results
 
-## 2021 International Context
-The Taiwan International Science Fair abstract lists Agribot as an Engineering category project by Talhah Patelia and Zayd Kara.
-
-[Read the TISF Agribot abstract](https://twsf.ntsec.gov.tw/activity/race-2/2021/pdf/100045.pdf)
+- Gold at the Eskom Expo in August 2020.
+- Chosen to represent South Africa at the Taiwan International Science Fair, where it won silver in February 2021.

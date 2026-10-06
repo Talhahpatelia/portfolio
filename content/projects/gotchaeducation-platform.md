@@ -1,21 +1,16 @@
-# GotchaEducation - Offline-First Education Software
+# GotchaEducation
 
-GotchaEducation is the current education company direction behind multiple practical products: Hifz class management, GotchaExam, community service workflows, LMS-style systems, tutoring operations, and custom education software.
+GotchaEducation makes software for schools and tutoring classes. It grew out of an exam-integrity idea I first built in 2021, and it is now a small set of apps that teachers use every day. The company is Talhah Patelia Engineering Solutions (Pty) Ltd, registered in September 2023.
 
-## What Changed
+## The apps
 
-The original GotchaExam work started from exam integrity. The current company direction is broader: build learning systems that survive real institutional constraints such as poor connectivity, limited devices, high teacher workload, parent reporting needs, and context-specific workflows.
+- **Hifz App** tracks sabaq (the new lesson), sabaq dhor (recent revision) and dhor (older revision), along with attendance, targets, guardians and teacher workflows.
+- **GotchaExam** runs secure exams with proctoring that works online and offline, including on low-bandwidth connections.
+- **Community Service App** lets schools record hours, evidence and approvals, with dashboards, leaderboards, events and exports.
+- **Custom work.** Before building anything for a school, we map how its teachers and administrators work and what infrastructure it has.
 
-## Current Product Surface
+## Where it is used
 
-- Hifz App tracks sabaq, sabaq dhor, dhor, attendance, targets, guardians, and teacher workflows.
-- GotchaExam handles secure exams, online/offline proctoring, and low-connectivity delivery.
-- Community Service App helps schools record hours, evidence, approvals, dashboards, leaderboards, events, and exports.
-- Consulting work maps learner, teacher, administrator, and infrastructure realities before building.
+On 17 July 2026 the apps were in use at 8 schools, with 22 teachers and 182 students. The team is five people.
 
-## Public Proof
-
-- [GotchaEducation company site](https://www.gotchaeducation.com/)
-- [Hifz App product site](https://hifz.gotchaeducation.com/)
-- [GotchaExam product site](https://www.gotchaexam.com/)
-- [Community Service App product page](https://www.gotchaeducation.com/products/community-service-app)
+In July 2024 GotchaExam won R100,000 at the Allan Gray Orbis Foundation Founders Pitch. In April 2024 the Wits Innovation Centre recognised me as a student entrepreneur for building Gotcha.

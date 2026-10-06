@@ -1,63 +1,54 @@
-// lib/types.ts
-export type Tag =
-  | "HPC"
-  | "Embedded"
-  | "ML"
-  | "Robotics"
-  | "EdTech"
-  | "Research"
-  | "Startup"
-  | "CAD"
-  | "Medical"
-  | "Infrastructure"
-  | string;
-
 export type LinkItem = {
   label: string;
   href: string;
-  kind?: "Live" | "Proof" | "Press" | "Store" | "Document" | "Source" | "Beta";
+  kind?: "Live" | "Source" | "Press" | "Store" | "Document" | "Beta";
 };
+
+export type ImageItem = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  /** Credit or one-line explanation shown under the image. */
+  caption?: string;
+  /** How a thumbnail is cropped. Certificates and screenshots use "contain" so nothing is cut off. */
+  fit?: "cover" | "contain";
+  /** What sort of image this is, for the gallery filter. Defaults to a photo. */
+  kind?: "photo" | "certificate" | "screen";
+};
+
+export type RelatedRef = { type: "project" | "award"; slug: string };
 
 export type BaseItem = {
   slug: string;
   title: string;
-  short: string;          // used in tiles + search results
-  description?: string;   // longer body for detail page
-  tags: Tag[];
-  date?: string;          // e.g. "2024-07"
-  image?: {
-    src: string;          // put in /public or remote (configure next/image)
-    alt: string;
-  };
-  links?: LinkItem[];
-  featured?: boolean;
+  /** One plain sentence. Shown in lists, search and as the meta description. */
+  summary: string;
+  /** Page title for search results, when it should say more than the heading does. Keep it under 44 characters. */
+  seoTitle?: string;
+  tags: string[];
+  /** ISO date: "2024", "2024-07" or "2024-07-26". */
+  date?: string;
   role?: string;
-  impact?: string;
+  image?: ImageItem;
+  /** More photos, shown on the entry's own page below the write-up. */
+  gallery?: ImageItem[];
+  links?: LinkItem[];
+  related?: RelatedRef[];
+  featured?: boolean;
 };
 
 export type AwardItem = BaseItem & {
   org?: string;
-  stack?: string[];
+  /** The outcome in one or two words ("1st", "Gold", "Top 25"). Shown down the left of the list so it can be scanned. */
+  result?: string;
 };
 
-
-export type ProjectStage =
-  | "Idea"
-  | "Validation"
-  | "MVP"
-  | "Scaling"
-  | "Completed";
-
-export type FundingStage =
-  | "Bootstrapped"
-  | "Grant"
-  | "Pre-Seed"
-  | "Seed"
-  | "Funded"
-  | "None";
+export type ProjectStatus = "Live" | "Beta" | "In progress" | "Completed";
 
 export type ProjectItem = BaseItem & {
-  stage: ProjectStage;        // business / product lifecycle
-  funding?: FundingStage;     // money status (optional)
+  status?: ProjectStatus;
   stack?: string[];
 };
+
+export type ItemType = "project" | "award" | "blog";

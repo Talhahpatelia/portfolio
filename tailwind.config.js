@@ -3,7 +3,6 @@ module.exports = {
   darkMode: "class",
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./data/**/*.{js,ts,jsx,tsx,mdx}",
     "./lib/**/*.{js,ts,jsx,tsx,mdx}",
@@ -11,13 +10,23 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "SFMono-Regular", "Consolas", "Liberation Mono", "monospace"],
+        sans: ["var(--font-archivo)", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"],
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        paper: "var(--paper)",
+        panel: "var(--panel)",
+        rule: "var(--rule)",
+        ink: "var(--ink)",
+        "ink-2": "var(--ink-2)",
+        signal: "var(--signal)",
+        "signal-ink": "var(--signal-ink)",
+        "on-signal": "var(--on-signal)",
+        "lamp-live": "var(--lamp-live)",
+        "lamp-beta": "var(--lamp-beta)",
+      },
+      maxWidth: {
+        page: "1200px",
+        prose: "40rem",
       },
     },
   },

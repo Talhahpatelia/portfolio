@@ -1,21 +1,19 @@
-# NavigoTransport - Offline-First Campus Transit
+# NavigoTransport
 
-NavigoTransport is a current campus transit product for Wits students, focused on making shuttle movement predictable even when signal is unreliable.
+NavigoTransport is a shuttle companion for students at Wits. It is live on Google Play, with an iOS build on TestFlight, and just under 1,000 students use it.
 
-## Product Direction
+## What it does
 
-- Door-to-door campus shuttle trip planning.
-- On-device route computation rather than a routing server dependency.
-- Offline timetables, routes, and map-aware trip guidance.
-- Departure reminders, service alerts, campus security, and lost-and-found flows.
-- Private-by-design trip planning where routes are computed on the device.
+- Plans door-to-door trips on the campus shuttle network.
+- Works out routes on the phone itself, so it needs no routing server and no signal. Your trip never leaves the device.
+- Keeps routes, timetables and maps available offline.
+- Sends departure reminders and service alerts.
+- Has campus security contacts and a lost-and-found.
 
-## Current Status
+## Why the phone does the work
 
-Navigo is in private beta with a public product site, Google Play listing, and iOS TestFlight beta. The public pages describe the product as a Wits University student shuttle companion with offline-first journey planning.
+Shuttle riders move through buildings, underground spaces and parts of campus with weak signal. A trip planner that needs a connection stops being useful in exactly those places, so Navigo keeps everything it needs on the device.
 
-## Public Proof
+## The company
 
-- [NavigoTransport website](https://www.navigotransport.com/)
-- [Google Play listing](https://play.google.com/store/apps/details?id=com.navigotransport.app&pcampaignid=web_share)
-- [iOS TestFlight beta](https://testflight.apple.com/join/vK7WpcnY)
+NavigoTransport is a separate company from GotchaEducation. I run it with co-founder Jared Swart, and I am a director.

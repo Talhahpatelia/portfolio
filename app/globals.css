@@ -2,95 +2,150 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Design tokens.
+  Neutral greys, one signal colour. Signal orange marks what can be pressed or
+  what is selected; lamp colours say whether something is live or in beta.
+  Nothing else is coloured.
+*/
 :root {
   color-scheme: light;
-  --bg-page: #f5f5f7;
-  --bg-surface: #ffffff;
-  --bg-surface-translucent: rgba(255, 255, 255, 0.82);
-  --bg-surface-muted: #f2f2f4;
-  --text-primary: #1d1d1f;
-  --text-muted: #6e6e73;
-  --border-soft: #d9d9df;
-  --border-strong: #b8b8c0;
-  --accent: #111111;
-  --accent-soft: #2c2c2e;
-  --accent-contrast: #ffffff;
-  --ring: rgba(0, 113, 227, 0.18);
-  --shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.055);
-  --pill-bg: #f5f5f7;
-  --pill-border: #dedee4;
-  --pill-text: #3a3a3c;
-  --pill-active-bg: #1d1d1f;
-  --pill-active-text: #ffffff;
-  --proof-bg: #f5f5f7;
-  --proof-border: #d2d2d7;
-  --proof-text: #1d1d1f;
-  --logo-bg: #050505;
-  --logo-fg: #ffffff;
-  --logo-border: rgba(255, 255, 255, 0.18);
+  --paper: #f0f0ee;
+  --panel: #e3e3e0;
+  --rule: #c2c2bd;
+  --ink: #1b1b1a;
+  --ink-2: #555551;
+  --signal: #ee5a1c;
+  --signal-ink: #b6400e;
+  --on-signal: #1b1b1a;
+  --lamp-live: #2f8a4f;
+  --lamp-beta: #d99a00;
 }
 
 :root.dark {
   color-scheme: dark;
-  --bg-page: #050505;
-  --bg-surface: #101012;
-  --bg-surface-translucent: rgba(16, 16, 18, 0.82);
-  --bg-surface-muted: #1b1b1d;
-  --text-primary: #f5f5f7;
-  --text-muted: #a1a1a6;
-  --border-soft: #2c2c2e;
-  --border-strong: #48484a;
-  --accent: #f5f5f7;
-  --accent-soft: #e5e5ea;
-  --accent-contrast: #050505;
-  --ring: rgba(10, 132, 255, 0.24);
-  --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.34);
-  --pill-bg: rgba(255, 255, 255, 0.05);
-  --pill-border: rgba(255, 255, 255, 0.12);
-  --pill-text: #d1d1d6;
-  --pill-active-bg: #f5f5f7;
-  --pill-active-text: #050505;
-  --proof-bg: rgba(255, 255, 255, 0.06);
-  --proof-border: rgba(255, 255, 255, 0.16);
-  --proof-text: #f5f5f7;
-  --logo-bg: #f5f5f7;
-  --logo-fg: #050505;
-  --logo-border: rgba(0, 0, 0, 0.12);
+  --paper: #171716;
+  --panel: #222221;
+  --rule: #3b3b39;
+  --ink: #ecece9;
+  --ink-2: #a5a5a0;
+  --signal: #ff6a2b;
+  --signal-ink: #ff8a55;
+  --on-signal: #171716;
+  --lamp-live: #4dba73;
+  --lamp-beta: #f0b429;
 }
 
-* {
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.2s ease;
+@layer base {
+  html {
+    background: var(--paper);
+    font-size: 16px;
+    scroll-padding-top: 1.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Headings use the extended cut of the typeface; text uses the regular width. */
+  b,
+  strong {
+    font-weight: 600;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-stretch: 116%;
+    font-weight: 500;
+    letter-spacing: -0.012em;
+    line-height: 1.1;
+  }
+
+  a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--signal) 28%, transparent);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+  }
+
+  img {
+    height: auto;
+  }
 }
 
-html {
-  background-color: var(--bg-page);
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+@layer components {
+  /* Text link: underlined, and the underline turns signal orange on hover. */
+  .link {
+    text-decoration-line: underline;
+    text-decoration-color: var(--rule);
+    transition: text-decoration-color 120ms ease;
+  }
+  .link:hover {
+    text-decoration-color: var(--signal);
+    text-decoration-thickness: 2px;
+  }
+
+  /* Body copy never runs wider than about 70 characters. */
+  .prose-col {
+    max-width: 40rem;
+  }
+
+  .lead {
+    font-size: 1.1875rem;
+    line-height: 1.55;
+    max-width: 38rem;
+  }
+
+  .label {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: var(--ink-2);
+  }
+
+  /* Photo viewer: a native <dialog>, so focus and Esc are handled by the browser. */
+  .zoom-dialog {
+    margin: auto;
+    padding: 0;
+    width: min(96vw, 1000px);
+    max-height: 94vh;
+    overflow: auto;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+  .zoom-dialog::backdrop {
+    background: color-mix(in srgb, var(--ink) 72%, transparent);
+  }
 }
 
-body {
-  background-color: var(--bg-page);
-  color: var(--text-primary);
-  font-feature-settings: "liga" 1, "tnum" 1, "cv02" 1;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
 
-code,
-pre,
-kbd,
-samp {
-  font-family: var(--font-geist-mono), "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-}
-
-.tracking-tight,
-.tracking-wide {
-  letter-spacing: 0;
-}
-
-::selection {
-  background: rgba(0, 113, 227, 0.16);
-  color: #1d1d1f;
-}
-
-:root.dark ::selection {
-  background: rgba(10, 132, 255, 0.24);
-  color: #f8fafc;
+@media print {
+  header,
+  footer {
+    display: none;
+  }
 }

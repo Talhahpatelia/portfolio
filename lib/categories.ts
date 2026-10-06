@@ -1,4 +1,4 @@
-import type { BaseItem, Tag } from "@/lib/types";
+import type { BaseItem } from "@/lib/types";
 
 const CATEGORY_ORDER = [
   "Healthcare",
@@ -73,7 +73,7 @@ function sortCategories(categories: Iterable<string>) {
   ];
 }
 
-export function categoriesForTags(tags: Tag[]) {
+export function categoriesForTags(tags: string[]) {
   const categories = tags
     .map((tag) => TAG_TO_CATEGORY[String(tag).toLowerCase()])
     .filter(Boolean);
@@ -81,7 +81,7 @@ export function categoriesForTags(tags: Tag[]) {
   return sortCategories(categories);
 }
 
-export function primaryCategory(tags: Tag[]) {
+export function primaryCategory(tags: string[]) {
   return categoriesForTags(tags)[0];
 }
 

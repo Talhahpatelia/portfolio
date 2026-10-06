@@ -1,18 +1,18 @@
-# Maftuha Institutional EdTech Platform
+# Maftuha
 
-Maftuha was built in 2021 as a single application for institutions during the shift to online learning.
+I built Maftuha in 2021, aged 16, with Adela Bootha, as schools moved online. It is one application for running a school.
 
-## Product Scope
-- Institution and classroom management with secure join flows.
-- Exam creation, invigilation, marking, and moderation workflows.
-- Image-processing-based invigilation using facial recognition and screen monitoring concepts.
-- Secure chat for members of an institution.
+## What it does
 
-## Local Project Context
-The local Maftuha repositories include a Next.js/Tauri desktop application, Prisma/PostgreSQL data models for institutions, classrooms, exams, chat, users, and uploads, plus TensorFlow.js-related dependencies for ML workflows.
+- Institutions and classrooms, with secure join flows.
+- Exams: creation, invigilation, marking and moderation.
+- Invigilation by image processing, using facial recognition and screen monitoring, plus sentiment analysis.
+- Secure chat for the members of an institution.
 
-## Public Recognition
-Maftuha won at TADHack South Africa in 2021.
+## How it was built
 
-- [TADHack South Africa winner article](https://blog.tadhack.com/2021/10/14/tadhack-south-africa-winner-maftuha/)
-- [TADHack Global 2021 summary](https://blog.tadhack.com/2021/09/26/tadhack-global-2021-summary/)
+A desktop app in Next.js and Tauri. Prisma and PostgreSQL hold institutions, classrooms, exams, chat, users and uploads, and TensorFlow.js handles the machine learning.
+
+## Result
+
+Maftuha won TADHack South Africa in September 2021, a 72-hour hackathon run with MTN and Geekulcha, and went on to the global TADHack. The exam-integrity part of it became Gotcha, and later GotchaExam.

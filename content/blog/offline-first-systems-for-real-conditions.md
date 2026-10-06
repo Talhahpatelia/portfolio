@@ -1,23 +1,19 @@
-# Offline-first systems for real conditions
+# Why my apps work offline
 
-The common thread in my current work is not only education or transport. It is reliability under imperfect conditions.
+GotchaEducation and NavigoTransport solve different problems, but they follow one rule: the app has to keep working when the connection does not.
 
-When software assumes perfect connectivity, unlimited devices, low workload, and predictable users, it becomes fragile in the exact environments where it is supposed to help. That has shaped how I think about GotchaEducation and NavigoTransport.
+## Schools
 
-## Education Needs Context
+GotchaEducation started with exams. GotchaExam was built to catch cheating in online and offline tests. Once schools were using it, exams turned out to be only part of the job. Teachers also needed attendance, progress tracking, reports for parents, and a way to record community service hours. They needed all of it with low data and little admin time.
 
-GotchaEducation started from assessment integrity, but the stronger lesson was that education software has to respect the full learner and teacher workflow. Exams matter, but so do attendance, progress, parent reporting, service records, low-data access, support, and the amount of admin a teacher can realistically handle.
+So the company now makes several small apps, one for each of those jobs, instead of one large exam product.
 
-That is why the company direction is now broader than proctoring. The products are still technical, but the design target is practical institutional use.
+## Campus transport
 
-## Transport Needs Local Computation
+NavigoTransport is a shuttle app for Wits students. A student checking the next shuttle is often inside a building or underground, where signal is weak. So the app plans trips on the phone itself, from timetables and maps stored there. It answers without a connection, and it does not send your trip anywhere.
 
-NavigoTransport has the same engineering pattern in a different domain. Campus transit is only useful if the app still helps while a student is moving through buildings, underground spaces, weak signal zones, and changing schedules.
+Reminders, service alerts, campus security contacts and lost-and-found sit on top of that.
 
-On-device journey planning, offline timetables, reminders, and simple safety flows are not decorative features. They are the product.
+## What stays the same
 
-## What I Want This Portfolio To Show
-
-The portfolio should make claims easy to verify. Each item needs a date, a role, a short explanation, and proof when public proof exists. When proof is not public yet, the site should say that clearly instead of hiding the gap.
-
-That is the same design principle I try to use in products: make the important state visible.
+Both apps are built around one principle: make the important state visible. In each, the thing a person needs to know right now should not depend on whether the network happens to be working.
