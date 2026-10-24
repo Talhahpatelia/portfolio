@@ -107,6 +107,15 @@ export const images = {
     "With the University of Zurich confirmation for the summer school, 5 to 24 July 2026.",
   ),
 
+  // Wits Student Leadership Awards, 2026
+  seoyAward: photo(
+    "/images/awards/wits-student-entrepreneur-of-the-year-2026.jpg",
+    720,
+    1280,
+    "Jared Swart and Talhah Patelia in dark suits, each holding a framed Student Leadership Award certificate and a glass trophy. Talhah's certificate is for Student Entrepreneur of the Year.",
+    "With the Student Entrepreneur of the Year certificate and trophy, 23 October 2026. Talhah Patelia is on the right. Jared Swart, on the left, also received a Student Leadership Award.",
+  ),
+
   // AFRETEC
   nairobiTeam: photo(
     "/images/awards/afretec-nairobi-team.jpg",

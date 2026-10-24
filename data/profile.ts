@@ -9,7 +9,7 @@ export const siteConfig = {
     "Electrical and information engineering student at Wits. I build school software and a campus shuttle app, and compete with the Wits supercomputing team.",
   location: "Johannesburg, South Africa",
   /** Bump this when the content changes. It feeds the footer, the sitemap and the profile's dateModified. */
-  updated: "2026-10-06",
+  updated: "2026-10-24",
   jobTitle: "Electrical and information engineering student",
   email: "admin@talhahpatelia.com",
   linkedin: "https://www.linkedin.com/in/talhah-patelia-77250a196/",

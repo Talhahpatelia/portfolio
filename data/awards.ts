@@ -9,6 +9,23 @@ import type { AwardItem } from "@/lib/types";
 export const awards: AwardItem[] = [
   // 2026
   {
+    slug: "wits-student-entrepreneur-of-the-year-2026",
+    seoTitle: "Student Entrepreneur of the Year, Wits",
+    image: images.seoyAward,
+    result: "Winner",
+    title: "Student Entrepreneur of the Year, Wits Student Leadership Awards",
+    summary:
+      "Won the category at the 2026 Wits Student Leadership Awards, after nominating myself with a portfolio on GotchaEducation, NavigoTransport and the Wits HPC results.",
+    tags: ["Entrepreneurship", "Recognition"],
+    date: "2026-10-23",
+    org: "University of the Witwatersrand",
+    related: [
+      { type: "project", slug: "gotchaeducation-platform" },
+      { type: "project", slug: "navigotransport-campus-transit" },
+    ],
+    featured: true,
+  },
+  {
     slug: "uzh-deep-dive-into-blockchain-2026",
     seoTitle: "Four firsts, UZH Deep Dive into Blockchain",
     image: images.uzhTeam,
